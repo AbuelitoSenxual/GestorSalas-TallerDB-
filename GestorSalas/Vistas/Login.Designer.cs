@@ -33,6 +33,8 @@
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.lblContraseña = new System.Windows.Forms.Label();
+            this.ptxOjoContraseña = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.ptxOjoContraseña)).BeginInit();
             this.SuspendLayout();
             // 
             // btnIngresar
@@ -64,9 +66,9 @@
             // 
             this.txtContraseña.Location = new System.Drawing.Point(91, 162);
             this.txtContraseña.Name = "txtContraseña";
-            this.txtContraseña.PasswordChar = '•';
             this.txtContraseña.Size = new System.Drawing.Size(100, 20);
             this.txtContraseña.TabIndex = 4;
+            this.txtContraseña.UseSystemPasswordChar = true;
             // 
             // lblContraseña
             // 
@@ -77,11 +79,25 @@
             this.lblContraseña.TabIndex = 3;
             this.lblContraseña.Text = "Contraseña";
             // 
+            // ptxOjoContraseña
+            // 
+            this.ptxOjoContraseña.Image = global::GestorSalas.Properties.Resources.Ocultoo;
+            this.ptxOjoContraseña.Location = new System.Drawing.Point(211, 162);
+            this.ptxOjoContraseña.Name = "ptxOjoContraseña";
+            this.ptxOjoContraseña.Size = new System.Drawing.Size(28, 20);
+            this.ptxOjoContraseña.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptxOjoContraseña.TabIndex = 5;
+            this.ptxOjoContraseña.TabStop = false;
+            this.ptxOjoContraseña.Click += new System.EventHandler(this.ptxOjoContraseña_Click);
+            this.ptxOjoContraseña.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ptxOjoContraseña_MouseDown);
+            this.ptxOjoContraseña.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ptxOjoContraseña_MouseUp);
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(286, 378);
+            this.ClientSize = new System.Drawing.Size(304, 360);
+            this.Controls.Add(this.ptxOjoContraseña);
             this.Controls.Add(this.txtContraseña);
             this.Controls.Add(this.lblContraseña);
             this.Controls.Add(this.txtUsuario);
@@ -89,6 +105,7 @@
             this.Controls.Add(this.btnIngresar);
             this.Name = "frmLogin";
             this.Text = "Login";
+            ((System.ComponentModel.ISupportInitialize)(this.ptxOjoContraseña)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -101,6 +118,7 @@
         private System.Windows.Forms.TextBox txtUsuario;
         private System.Windows.Forms.TextBox txtContraseña;
         private System.Windows.Forms.Label lblContraseña;
+        private System.Windows.Forms.PictureBox ptxOjoContraseña;
     }
 }
 

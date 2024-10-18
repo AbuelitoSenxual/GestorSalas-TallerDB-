@@ -16,5 +16,22 @@ namespace GestorSalas
         {
             InitializeComponent();
         }
+
+        private void ptxOjoContraseña_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ptxOjoContraseña_MouseDown(object sender, MouseEventArgs e)
+        {
+            ptxOjoContraseña.Image = Properties.Resources.Abierto;
+            txtContraseña.UseSystemPasswordChar = false; // Muestra Contraseña
+        }
+
+        private void ptxOjoContraseña_MouseUp(object sender, MouseEventArgs e)
+        {
+            ptxOjoContraseña.Image = Properties.Resources.Ocultoo;
+            txtContraseña.UseSystemPasswordChar = true; // Oculta Contraseña
+        }
     }
 }
