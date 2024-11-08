@@ -47,51 +47,52 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Confirmacion.cs">
+    <Compile Include="ConexionBD.cs" />
+    <Compile Include="Vistas\Confirmacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Confirmacion.Designer.cs">
+    <Compile Include="Vistas\Confirmacion.Designer.cs">
       <DependentUpon>Confirmacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
+    <Compile Include="Vistas\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
+    <Compile Include="Vistas\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Peliculas.cs">
+    <Compile Include="Vistas\Peliculas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Peliculas.Designer.cs">
+    <Compile Include="Vistas\Peliculas.Designer.cs">
       <DependentUpon>Peliculas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Funciones.cs">
+    <Compile Include="Vistas\Funciones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Funciones.Designer.cs">
+    <Compile Include="Vistas\Funciones.Designer.cs">
       <DependentUpon>Funciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="Asientos.cs">
+    <Compile Include="Vistas\Asientos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Asientos.Designer.cs">
+    <Compile Include="Vistas\Asientos.Designer.cs">
       <DependentUpon>Asientos.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Confirmacion.resx">
+    <EmbeddedResource Include="Vistas\Confirmacion.resx">
       <DependentUpon>Confirmacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="Vistas\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Peliculas.resx">
+    <EmbeddedResource Include="Vistas\Peliculas.resx">
       <DependentUpon>Peliculas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Funciones.resx">
+    <EmbeddedResource Include="Vistas\Funciones.resx">
       <DependentUpon>Funciones.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Asientos.resx">
+    <EmbeddedResource Include="Vistas\Asientos.resx">
       <DependentUpon>Asientos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

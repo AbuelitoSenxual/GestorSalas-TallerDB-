@@ -43,6 +43,7 @@
             this.btnCambiarUsuario.TabIndex = 0;
             this.btnCambiarUsuario.Text = "Cambiar Usuario";
             this.btnCambiarUsuario.UseVisualStyleBackColor = true;
+            this.btnCambiarUsuario.Click += new System.EventHandler(this.btnCambiarUsuario_Click);
             // 
             // btnBuscarFuncion
             // 
@@ -54,20 +55,21 @@
             this.btnBuscarFuncion.TabIndex = 1;
             this.btnBuscarFuncion.Text = "Buscar Funcion";
             this.btnBuscarFuncion.UseVisualStyleBackColor = true;
+            this.btnBuscarFuncion.Click += new System.EventHandler(this.btnBuscarFuncion_Click);
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
+            this.listBox1.ItemHeight = 25;
             this.listBox1.Location = new System.Drawing.Point(39, 111);
             this.listBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(496, 384);
+            this.listBox1.Size = new System.Drawing.Size(496, 379);
             this.listBox1.TabIndex = 2;
             // 
-            // Form2
+            // Peliculas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(830, 607);
             this.Controls.Add(this.listBox1);
@@ -75,8 +77,8 @@
             this.Controls.Add(this.btnCambiarUsuario);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "Peliculas";
+            this.Text = "Peliculas";
             this.ResumeLayout(false);
 
         }
