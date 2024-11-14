@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GestorSalas.Modelos;
+using GestorSalas.Servicios;
 
 namespace GestorSalas
 {
@@ -26,6 +27,11 @@ namespace GestorSalas
             this.Close();
         }
 
+
+
+
+
+
         private void btnBuscarFuncion_Click(object sender, EventArgs e)
         {
 
@@ -33,7 +39,20 @@ namespace GestorSalas
 
         private void Peliculas_Load(object sender, EventArgs e)
         {
+            baseDatosServicios baseDatosServicios = new baseDatosServicios();
+            peliculasLtb.Items.Clear();
+            peliculasLtb.Items.AddRange(baseDatosServicios.peliculasInformacion());
+        }
 
+        private void gestionarBaseBtn_Click(object sender, EventArgs e)
+        {
+            if (!empleado.puesto.Equals("Administrador"))
+            {
+                MessageBox.Show("Solo para administradores");
+            }
+            else { 
+                
+            }
         }
     }
 }

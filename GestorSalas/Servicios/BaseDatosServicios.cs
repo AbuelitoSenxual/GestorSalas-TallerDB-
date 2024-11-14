@@ -21,8 +21,8 @@ namespace GestorSalas.Servicios
             //usa esta y cambia la contrasena y usuario
             //cadenaConexion = $"Server=localhost; Database=GestorSalas; User Id={usuario}; Password={contraseña}; TrustServerCertificate=True;";
 
-            
-            
+
+
         }
 
         public bool probarConexion()
@@ -77,7 +77,7 @@ namespace GestorSalas.Servicios
                 conexion.Open();
                 string querry = $"select ID_Empleado,Nombre,Puesto,Usuario,Contraseña from Empleados where Usuario='{usuario}' AND Contraseña = '{contraseña}'";
                 using (SqlCommand comando = new SqlCommand(querry, conexion)) {
-                    using (SqlDataReader lector = comando.ExecuteReader()) { 
+                    using (SqlDataReader lector = comando.ExecuteReader()) {
                         if (lector.Read())
                         {
                             empleado.id_Empleado = lector.GetInt32(0);
@@ -86,13 +86,40 @@ namespace GestorSalas.Servicios
                             empleado.usuario = lector.GetString(3);
                             empleado.contraseña = lector.GetString(4);
 
-                           
+
                         }
                     }
                 }
                 return empleado;
             }
 
+        }
+
+        public string[] peliculasInformacion()
+        {
+            conexion = new SqlConnection(cadenaConexion);
+            List<string> listaPeliculas = new List<string>();
+            string querry = "SELECT Nombre, Duracion, Genero FROM Peliculas;";
+
+            using (SqlCommand comando = new SqlCommand(querry, conexion))
+            {
+                conexion.Open();
+                using (SqlDataReader lector = comando.ExecuteReader())
+                {
+                    while (lector.Read())
+                    {
+                        string nombre = lector.GetString(0).PadRight(30);  
+                        string genero = lector.GetString(2).PadRight(20); 
+                        string duracion = lector.GetInt32(1).ToString().PadLeft(5); 
+
+                        // Añadir cada línea con una separación controlada
+                        listaPeliculas.Add(nombre + genero + duracion);
+                    }
+                }
+                conexion.Close();
+            }
+
+            return listaPeliculas.ToArray();
         }
 
     }

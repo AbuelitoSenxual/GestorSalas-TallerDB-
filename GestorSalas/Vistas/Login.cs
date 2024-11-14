@@ -35,8 +35,11 @@ namespace GestorSalas
                     {
                         Peliculas peliculas = new Peliculas(baseDatosServ.inicializarEmpleado(usuario,contraseña));
                         this.Hide();
+                        peliculas.Owner = this;
                         if (peliculas.ShowDialog() == DialogResult.OK) {
+                            txtUsuario.Text = txtContraseña.Text = null;
                             this.Show();
+
                         }
                     }
                     else {

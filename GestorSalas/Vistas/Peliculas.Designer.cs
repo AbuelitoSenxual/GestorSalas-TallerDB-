@@ -30,7 +30,8 @@
         {
             this.btnCambiarUsuario = new System.Windows.Forms.Button();
             this.btnBuscarFuncion = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.peliculasLtb = new System.Windows.Forms.ListBox();
+            this.gestionarBaseBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCambiarUsuario
@@ -57,22 +58,35 @@
             this.btnBuscarFuncion.UseVisualStyleBackColor = true;
             this.btnBuscarFuncion.Click += new System.EventHandler(this.btnBuscarFuncion_Click);
             // 
-            // listBox1
+            // peliculasLtb
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(39, 111);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(496, 364);
-            this.listBox1.TabIndex = 2;
+            this.peliculasLtb.FormattingEnabled = true;
+            this.peliculasLtb.ItemHeight = 20;
+            this.peliculasLtb.Location = new System.Drawing.Point(39, 111);
+            this.peliculasLtb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.peliculasLtb.Name = "peliculasLtb";
+            this.peliculasLtb.Size = new System.Drawing.Size(496, 364);
+            this.peliculasLtb.TabIndex = 2;
+            // 
+            // gestionarBaseBtn
+            // 
+            this.gestionarBaseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gestionarBaseBtn.Location = new System.Drawing.Point(585, 259);
+            this.gestionarBaseBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gestionarBaseBtn.Name = "gestionarBaseBtn";
+            this.gestionarBaseBtn.Size = new System.Drawing.Size(182, 100);
+            this.gestionarBaseBtn.TabIndex = 3;
+            this.gestionarBaseBtn.Text = "Gestionar Base";
+            this.gestionarBaseBtn.UseVisualStyleBackColor = true;
+            this.gestionarBaseBtn.Click += new System.EventHandler(this.gestionarBaseBtn_Click);
             // 
             // Peliculas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(830, 607);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.gestionarBaseBtn);
+            this.Controls.Add(this.peliculasLtb);
             this.Controls.Add(this.btnBuscarFuncion);
             this.Controls.Add(this.btnCambiarUsuario);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -88,6 +102,7 @@
 
         private System.Windows.Forms.Button btnCambiarUsuario;
         private System.Windows.Forms.Button btnBuscarFuncion;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox peliculasLtb;
+        private System.Windows.Forms.Button gestionarBaseBtn;
     }
 }
