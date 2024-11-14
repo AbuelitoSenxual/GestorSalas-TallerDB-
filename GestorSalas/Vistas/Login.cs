@@ -18,15 +18,12 @@ namespace GestorSalas
         {
             InitializeComponent();
 
-        
-
-
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
 
-string usuario = txtUsuario.Text;
+            string usuario = txtUsuario.Text;
             string contraseña = txtContraseña.Text;
 
 
@@ -39,29 +36,24 @@ string usuario = txtUsuario.Text;
             // select * from Empleados where Usuario = 'cperez' and Contraseña= 'password123'
             try
             {
-                string consulta = "select * from Empleados where Usuario = '"+ usuario+"' and Contraseña= '"+contraseña+"'";
+                string consulta = "select * from Empleados where Usuario = '" + usuario + "' and Contraseña= '" + contraseña + "'";
                 Console.WriteLine(consulta);
-            SqlCommand comando = new SqlCommand(consulta, conexion.ObtenerConexion());
+                SqlCommand comando = new SqlCommand(consulta, conexion.ProbarConexion());
                 Console.WriteLine(consulta);
                 SqlDataReader reader;
-            reader = comando.ExecuteReader();
+                reader = comando.ExecuteReader();
 
 
-            if (reader.HasRows == true)
-            {
+                if (reader.HasRows == true)
+                {
                     this.Hide();
-                    Login login = new Login();
 
-                    
-                    Peliculas peliculas = new Peliculas();  
-                 
-                peliculas.ShowDialog();
+
+                    Peliculas peliculas = new Peliculas();
+
+                    peliculas.ShowDialog();
                 }
                 else { MessageBox.Show(" Numero de Empleado o contraseña incorrecta!!!!!"); }
-
-
-         
-
             }
             catch (Exception ex)
             {
