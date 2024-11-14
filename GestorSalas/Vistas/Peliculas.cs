@@ -39,9 +39,7 @@ namespace GestorSalas
 
         private void Peliculas_Load(object sender, EventArgs e)
         {
-            baseDatosServicios baseDatosServicios = new baseDatosServicios();
-            peliculasLtb.Items.Clear();
-            peliculasLtb.Items.AddRange(baseDatosServicios.peliculasInformacion());
+           
         }
 
         private void gestionarBaseBtn_Click(object sender, EventArgs e)
@@ -51,8 +49,17 @@ namespace GestorSalas
                 MessageBox.Show("Solo para administradores");
             }
             else { 
+
+
                 
             }
+        }
+
+        private void Peliculas_Activated(object sender, EventArgs e)
+        {
+            baseDatosServicios baseDatosServicios = new baseDatosServicios();
+            peliculasLtb.Items.Clear();
+            peliculasLtb.Items.AddRange(baseDatosServicios.peliculasInformacion());
         }
     }
 }

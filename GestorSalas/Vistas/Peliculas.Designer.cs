@@ -93,6 +93,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Peliculas";
             this.Text = "Peliculas";
+            this.Activated += new System.EventHandler(this.Peliculas_Activated);
             this.Load += new System.EventHandler(this.Peliculas_Load);
             this.ResumeLayout(false);
 
