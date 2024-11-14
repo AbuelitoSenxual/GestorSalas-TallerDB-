@@ -1,5 +1,6 @@
 ﻿using GestorSalas.Modelos;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -17,9 +18,9 @@ namespace GestorSalas.Servicios
         private SqlConnection conexion;
         public baseDatosServicios()
         {
-            //cadenaConexion = $"Server=DESKTOP-IPBG7ER\\SQLEXPRESS; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
+            cadenaConexion = $"Server=DESKTOP-IPBG7ER\\SQLEXPRESS; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
             //usa esta y cambia la contrasena y usuario
-            cadenaConexion = $"Server=localhost; Database=GestorSalas; User Id={usuario}; Password={contraseña}; TrustServerCertificate=True;";
+            //cadenaConexion = $"Server=localhost; Database=GestorSalas; User Id={usuario}; Password={contraseña}; TrustServerCertificate=True;";
 
 
 
@@ -122,5 +123,31 @@ namespace GestorSalas.Servicios
             return listaPeliculas.ToArray();
         }
 
+        public bool agregarPelicula(string nombre,string genero,int duracion) {
+            string querry = $"INSERT INTO Peliculas (Nombre, Duracion, Genero) VALUES ('{nombre}', {duracion}, '{genero}');";
+            conexion = new SqlConnection(cadenaConexion);
+            using (conexion) {
+
+                try
+                {
+                    conexion.Open();
+
+                    using (SqlCommand command = new SqlCommand(querry, conexion))
+                    {
+
+                        int rowsAffected = command.ExecuteNonQuery();
+                        Console.WriteLine($"Filas insertadas: {rowsAffected}");
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                    Console.WriteLine("Ocurrió un error: " + ex.Message);
+                }
+
+            }
+        
+        }
     }
 }

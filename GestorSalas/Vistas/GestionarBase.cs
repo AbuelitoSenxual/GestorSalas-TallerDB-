@@ -16,5 +16,19 @@ namespace GestorSalas.Vistas
         {
             InitializeComponent();
         }
+
+        private void volverBtn_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void gesPeliculaBtn_Click(object sender, EventArgs e)
+        {
+
+            AgregarPelicualas agregarPelicualas = new AgregarPelicualas();
+            agregarPelicualas.ShowDialog();
+
+        }
     }
 }

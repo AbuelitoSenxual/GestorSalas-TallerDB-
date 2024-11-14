@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GestorSalas.Modelos;
 using GestorSalas.Servicios;
+using GestorSalas.Vistas;
 
 namespace GestorSalas
 {
@@ -49,8 +50,13 @@ namespace GestorSalas
                 MessageBox.Show("Solo para administradores");
             }
             else { 
-
-
+                
+                GestionarBase gestionarBase = new GestionarBase();
+                this.Hide();
+                gestionarBase.Owner = this;
+                if (gestionarBase.ShowDialog() == DialogResult.OK) {
+                    this.Show();
+                }
                 
             }
         }

@@ -30,6 +30,7 @@
         {
             this.gesPeliculaBtn = new System.Windows.Forms.Button();
             this.gestionarEmplBtn = new System.Windows.Forms.Button();
+            this.volverBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // gesPeliculaBtn
@@ -40,6 +41,7 @@
             this.gesPeliculaBtn.TabIndex = 0;
             this.gesPeliculaBtn.Text = "Gestionar Peliculas";
             this.gesPeliculaBtn.UseVisualStyleBackColor = true;
+            this.gesPeliculaBtn.Click += new System.EventHandler(this.gesPeliculaBtn_Click);
             // 
             // gestionarEmplBtn
             // 
@@ -50,11 +52,22 @@
             this.gestionarEmplBtn.Text = "Gestionar Empleados";
             this.gestionarEmplBtn.UseVisualStyleBackColor = true;
             // 
+            // volverBtn
+            // 
+            this.volverBtn.Location = new System.Drawing.Point(166, 193);
+            this.volverBtn.Name = "volverBtn";
+            this.volverBtn.Size = new System.Drawing.Size(75, 23);
+            this.volverBtn.TabIndex = 2;
+            this.volverBtn.Text = "Volver";
+            this.volverBtn.UseVisualStyleBackColor = true;
+            this.volverBtn.Click += new System.EventHandler(this.volverBtn_Click);
+            // 
             // GestionarBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 213);
+            this.ClientSize = new System.Drawing.Size(398, 256);
+            this.Controls.Add(this.volverBtn);
             this.Controls.Add(this.gestionarEmplBtn);
             this.Controls.Add(this.gesPeliculaBtn);
             this.Name = "GestionarBase";
@@ -67,5 +80,6 @@
 
         private System.Windows.Forms.Button gesPeliculaBtn;
         private System.Windows.Forms.Button gestionarEmplBtn;
+        private System.Windows.Forms.Button volverBtn;
     }
 }
