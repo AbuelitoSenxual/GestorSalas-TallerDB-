@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestorSalas.Servicios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +14,6 @@ namespace GestorSalas
 {
     public partial class Login : Form
     {
-        ConexionBD conexion = new ConexionBD();
         public Login()
         {
             InitializeComponent();
@@ -25,40 +25,36 @@ namespace GestorSalas
 
             string usuario = txtUsuario.Text;
             string contraseña = txtContraseña.Text;
+            baseDatosServicios baseDatosServ = new baseDatosServicios();
 
-
-
-
-            //Nombre = 'Carlos Pérez' and Contraseña= 'password123
-
-            // select * from Empleados where Usuario = '"+usuario+"' and Contraseña= '"+contraseña+"'"
-
-            // select * from Empleados where Usuario = 'cperez' and Contraseña= 'password123'
-            try
-            {
-                string consulta = "select * from Empleados where Usuario = '" + usuario + "' and Contraseña= '" + contraseña + "'";
-                Console.WriteLine(consulta);
-                SqlCommand comando = new SqlCommand(consulta, conexion.ProbarConexion());
-                Console.WriteLine(consulta);
-                SqlDataReader reader;
-                reader = comando.ExecuteReader();
-
-
-                if (reader.HasRows == true)
+            if (baseDatosServ.probarConexion()) {
+                if (usuario != "" && contraseña != "")
                 {
-                    this.Hide();
+                    //
+                    if (baseDatosServ.verificarUsuario(usuario, contraseña))
+                    {
+                        Peliculas peliculas = new Peliculas(baseDatosServ.inicializarEmpleado(usuario,contraseña));
+                        this.Hide();
+                        if (peliculas.ShowDialog() == DialogResult.OK) {
+                            this.Show();
+                        }
+                    }
+                    else {
+                        MessageBox.Show("Usuario o Contraseña Erronios");
+                        txtUsuario.Text = txtContraseña.Text = null;
 
-
-                    Peliculas peliculas = new Peliculas();
-
-                    peliculas.ShowDialog();
+                    }
                 }
-                else { MessageBox.Show(" Numero de Empleado o contraseña incorrecta!!!!!"); }
-            }
-            catch (Exception ex)
-            {
+                else {
+                    MessageBox.Show("Profavor rellene todos los campos");
 
+
+                }
+
+  
+            
             }
+
 
         }
 
