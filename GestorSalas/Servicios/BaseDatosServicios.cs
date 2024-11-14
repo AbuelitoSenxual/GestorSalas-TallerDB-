@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -96,31 +97,78 @@ namespace GestorSalas.Servicios
 
         }
 
-        public string[] peliculasInformacion()
-        {
+        public DataTable peliculasInformacion() {
+
+            DataTable dt = new DataTable();
             conexion = new SqlConnection(cadenaConexion);
-            List<string> listaPeliculas = new List<string>();
-            string querry = "SELECT Nombre, Duracion, Genero FROM Peliculas;";
-
-            using (SqlCommand comando = new SqlCommand(querry, conexion))
+            string querry = "SELECT * FROM Peliculas;";
+            using (conexion)
             {
-                conexion.Open();
-                using (SqlDataReader lector = comando.ExecuteReader())
+                try
                 {
-                    while (lector.Read())
-                    {
-                        string nombre = lector.GetString(0).PadRight(30);  
-                        string genero = lector.GetString(2).PadRight(20); 
-                        string duracion = lector.GetInt32(1).ToString().PadLeft(5); 
+                    // Crear un adaptador SQL
+                    SqlDataAdapter da = new SqlDataAdapter(querry, conexion);
 
-                        // Añadir cada línea con una separación controlada
-                        listaPeliculas.Add(nombre + genero + duracion);
-                    }
+                    // Llenar el DataTable con los datos de la base de datos
+                    da.Fill(dt);
                 }
-                conexion.Close();
+                catch (Exception ex)
+                {
+                    // En caso de error, mostrar el mensaje de error
+                    MessageBox.Show("Error: " + ex.Message);
+                }
             }
 
-            return listaPeliculas.ToArray();
+            
+            return dt;
+        }
+        public DataTable empleadoInformacion()
+        {
+
+            DataTable dt = new DataTable();
+            conexion = new SqlConnection(cadenaConexion);
+            string querry = "SELECT * FROM Empleados;";
+            using (conexion)
+            {
+                try
+                {
+                    // Crear un adaptador SQL
+                    SqlDataAdapter da = new SqlDataAdapter(querry, conexion);
+
+                    // Llenar el DataTable con los datos de la base de datos
+                    da.Fill(dt);
+                }
+                catch (Exception ex)
+                {
+                    // En caso de error, mostrar el mensaje de error
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+
+
+            return dt;
+        }
+
+        public void eliminarEmpleado(int idEmpleado)
+        {
+            conexion = new SqlConnection(cadenaConexion);
+            string query = $"DELETE FROM [GestorSalas].[dbo].[Empleados] WHERE ID_Empleado = {idEmpleado}";
+
+            using (conexion)
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(query, conexion);
+
+                    conexion.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Empleado eliminado correctamente.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al eliminar empleado: " + ex.Message);
+                }
+            }
         }
 
         public bool agregarPelicula(string nombre,string genero,int duracion) {

@@ -64,8 +64,9 @@ namespace GestorSalas
         private void Peliculas_Activated(object sender, EventArgs e)
         {
             baseDatosServicios baseDatosServicios = new baseDatosServicios();
-            peliculasLtb.Items.Clear();
-            peliculasLtb.Items.AddRange(baseDatosServicios.peliculasInformacion());
+            DataTable dt = baseDatosServicios.peliculasInformacion();
+            peliculasDgv.DataSource=dt;
+            
         }
     }
 }

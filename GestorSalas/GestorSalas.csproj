@@ -66,6 +66,12 @@
     <Compile Include="Vistas\GestionarBase.Designer.cs">
       <DependentUpon>GestionarBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\GestionarEmpleados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\GestionarEmpleados.Designer.cs">
+      <DependentUpon>GestionarEmpleados.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\GestionarBase.resx">
       <DependentUpon>GestionarBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\GestionarEmpleados.resx">
+      <DependentUpon>GestionarEmpleados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

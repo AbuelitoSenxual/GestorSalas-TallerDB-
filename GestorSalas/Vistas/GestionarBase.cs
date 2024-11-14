@@ -30,5 +30,14 @@ namespace GestorSalas.Vistas
             agregarPelicualas.ShowDialog();
 
         }
+
+        private void gestionarEmplBtn_Click(object sender, EventArgs e)
+        {
+            GestionarEmpleados gestionarEmpleados = new GestionarEmpleados();
+            this.Hide();
+            gestionarEmpleados.ShowDialog();
+            this.Show();
+
+        }
     }
 }

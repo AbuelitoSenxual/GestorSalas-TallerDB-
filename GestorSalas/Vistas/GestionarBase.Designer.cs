@@ -39,7 +39,7 @@
             this.gesPeliculaBtn.Name = "gesPeliculaBtn";
             this.gesPeliculaBtn.Size = new System.Drawing.Size(130, 96);
             this.gesPeliculaBtn.TabIndex = 0;
-            this.gesPeliculaBtn.Text = "Gestionar Peliculas";
+            this.gesPeliculaBtn.Text = "Agregar Peliculas";
             this.gesPeliculaBtn.UseVisualStyleBackColor = true;
             this.gesPeliculaBtn.Click += new System.EventHandler(this.gesPeliculaBtn_Click);
             // 
@@ -51,6 +51,7 @@
             this.gestionarEmplBtn.TabIndex = 1;
             this.gestionarEmplBtn.Text = "Gestionar Empleados";
             this.gestionarEmplBtn.UseVisualStyleBackColor = true;
+            this.gestionarEmplBtn.Click += new System.EventHandler(this.gestionarEmplBtn_Click);
             // 
             // volverBtn
             // 
