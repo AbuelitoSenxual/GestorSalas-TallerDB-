@@ -48,6 +48,12 @@
   <ItemGroup>
     <Compile Include="Modelos\Empleado.cs" />
     <Compile Include="Servicios\BaseDatosServicios.cs" />
+    <Compile Include="Vistas\AggregarPelicualas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\AggregarPelicualas.Designer.cs">
+      <DependentUpon>AggregarPelicualas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Confirmacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Vistas\AggregarPelicualas.resx">
+      <DependentUpon>AggregarPelicualas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Confirmacion.resx">
       <DependentUpon>Confirmacion.cs</DependentUpon>
     </EmbeddedResource>
