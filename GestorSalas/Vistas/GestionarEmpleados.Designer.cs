@@ -52,6 +52,7 @@
             this.modificarEmpBtn.TabIndex = 2;
             this.modificarEmpBtn.Text = "Modificar";
             this.modificarEmpBtn.UseVisualStyleBackColor = true;
+            this.modificarEmpBtn.Click += new System.EventHandler(this.modificarEmpBtn_Click);
             // 
             // empleadoDgv
             // 

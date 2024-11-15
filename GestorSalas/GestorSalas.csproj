@@ -60,6 +60,12 @@
     <Compile Include="Vistas\Confirmacion.Designer.cs">
       <DependentUpon>Confirmacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\EmpleadoFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\EmpleadoFrm.Designer.cs">
+      <DependentUpon>EmpleadoFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\GestionarBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Confirmacion.resx">
       <DependentUpon>Confirmacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\EmpleadoFrm.resx">
+      <DependentUpon>EmpleadoFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\GestionarBase.resx">
       <DependentUpon>GestionarBase.cs</DependentUpon>

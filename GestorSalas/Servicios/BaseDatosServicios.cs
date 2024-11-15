@@ -170,6 +170,92 @@ namespace GestorSalas.Servicios
                 }
             }
         }
+        public void InsertarEmpleado(Empleado empleado)
+        {
+            conexion = new SqlConnection(cadenaConexion);
+            using (conexion)
+            {
+                try
+                {
+                    conexion.Open();
+
+                    string query = "INSERT INTO [GestorSalas].[dbo].[Empleados] " +
+                                   "([Nombre], [Puesto], [Usuario], [Contraseña]) " +
+                                   "VALUES (@Nombre, @Puesto, @Usuario, @Contraseña)";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        // Parametrizar la consulta para evitar SQL Injection
+                        cmd.Parameters.AddWithValue("@Nombre", empleado.nombre);
+                        cmd.Parameters.AddWithValue("@Puesto", empleado.puesto);
+                        cmd.Parameters.AddWithValue("@Usuario", empleado.usuario);
+                        cmd.Parameters.AddWithValue("@Contraseña", empleado.contraseña);
+
+                        // Ejecutar la inserción
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+
+                        if (filasAfectadas > 0)
+                        {
+                            Console.WriteLine("Empleado insertado con éxito.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("No se pudo insertar el empleado.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al insertar el empleado: " + ex.Message);
+                }
+            }
+        }
+
+
+        public void ActualizarEmpleado(Empleado empleado)
+        {
+            conexion = new SqlConnection(cadenaConexion);
+            using (conexion)
+            {
+                try
+                {
+                    conexion.Open();
+
+                    string query = "UPDATE [GestorSalas].[dbo].[Empleados] SET " +
+                                   "[Nombre] = @Nombre, " +
+                                   "[Puesto] = @Puesto, " +
+                                   "[Usuario] = @Usuario, " +
+                                   "[Contraseña] = @Contraseña " +
+                                   "WHERE [ID_Empleado] = @ID_Empleado";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        // Parametrizar la consulta para evitar SQL Injection
+                        cmd.Parameters.AddWithValue("@Nombre", empleado.nombre);
+                        cmd.Parameters.AddWithValue("@Puesto", empleado.puesto);
+                        cmd.Parameters.AddWithValue("@Usuario", empleado.usuario);
+                        cmd.Parameters.AddWithValue("@Contraseña", empleado.contraseña);
+                        cmd.Parameters.AddWithValue("@ID_Empleado", empleado.id_Empleado);
+
+                        // Ejecutar la actualización
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+
+                        if (filasAfectadas > 0)
+                        {
+                            Console.WriteLine("Empleado actualizado con éxito.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("No se encontró el empleado con el ID proporcionado.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al actualizar el empleado: " + ex.Message);
+                }
+            }
+        }
 
         public bool agregarPelicula(string nombre,string genero,int duracion) {
             string querry = $"INSERT INTO Peliculas (Nombre, Duracion, Genero) VALUES ('{nombre}', {duracion}, '{genero}');";
