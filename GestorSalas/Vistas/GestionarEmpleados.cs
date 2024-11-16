@@ -52,6 +52,7 @@ namespace GestorSalas.Vistas
 
         private void modificarEmpBtn_Click(object sender, EventArgs e)
         {
+            baseDatosServicios baseDatosServicios = new baseDatosServicios();
             if (empleadoDgv.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = empleadoDgv.SelectedRows[0];
@@ -65,8 +66,11 @@ namespace GestorSalas.Vistas
                 empleado.contraseña = selectedRow.Cells["Contraseña"].Value.ToString();
 
                 EmpleadoFrm empleadoFrm = new EmpleadoFrm(empleado);
-                empleadoFrm.Show();
+                empleadoFrm.ShowDialog();
 
+                baseDatosServicios.ActualizarEmpleado(empleadoFrm.empleado);
+                DataTable dt = baseDatosServicios.empleadoInformacion();
+                empleadoDgv.DataSource = dt;
 
 
 
@@ -75,6 +79,32 @@ namespace GestorSalas.Vistas
             {
                 MessageBox.Show("Por favor, seleccione una fila para eliminar.");
             }
+        }
+
+        private void volverBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void agregarEmbtn_Click(object sender, EventArgs e)
+        {
+                baseDatosServicios baseDatosServicios = new baseDatosServicios();
+
+   
+
+                Empleado empleado = new Empleado();
+
+
+                EmpleadoFrm empleadoFrm = new EmpleadoFrm(empleado);
+                empleadoFrm.ShowDialog();
+
+                baseDatosServicios.InsertarEmpleado(empleadoFrm.empleado);
+                DataTable dt = baseDatosServicios.empleadoInformacion();
+                empleadoDgv.DataSource = dt;
+
+
+
+   
         }
     }
 }

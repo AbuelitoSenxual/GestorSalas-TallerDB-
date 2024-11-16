@@ -54,9 +54,9 @@ namespace GestorSalas
                 GestionarBase gestionarBase = new GestionarBase();
                 this.Hide();
                 gestionarBase.Owner = this;
-                if (gestionarBase.ShowDialog() == DialogResult.OK) {
+                gestionarBase.ShowDialog();
                     this.Show();
-                }
+            
                 
             }
         }

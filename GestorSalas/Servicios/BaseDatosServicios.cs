@@ -257,6 +257,54 @@ namespace GestorSalas.Servicios
             }
         }
 
+        public void InsertarEmpleado(string nombre, string puesto, string usuario, string contraseña)
+        {
+            // Conexión a la base de datos
+            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            {
+                try
+                {
+                    // Abrir la conexión
+                    conexion.Open();
+
+                    // Consulta de inserción
+                    string query = "INSERT INTO [GestorSalas].[dbo].[Empleados] " +
+                                   "([Nombre], [Puesto], [Usuario], [Contraseña]) " +
+                                   "VALUES (@Nombre, @Puesto, @Usuario, @Contraseña)";
+
+                    // Crear el comando SQL con la consulta y la conexión
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        // Parametrizar la consulta para evitar SQL Injection
+                        cmd.Parameters.AddWithValue("@Nombre", nombre);
+                        cmd.Parameters.AddWithValue("@Puesto", puesto);
+                        cmd.Parameters.AddWithValue("@Usuario", usuario);
+                        cmd.Parameters.AddWithValue("@Contraseña", contraseña);
+
+                        // Ejecutar la inserción
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+
+                        // Verificar si la inserción fue exitosa
+                        if (filasAfectadas > 0)
+                        {
+                            Console.WriteLine("Empleado insertado con éxito.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error al insertar el empleado.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Manejo de excepciones
+                    Console.WriteLine("Error al insertar el empleado: " + ex.Message);
+                }
+            }
+        }
+
+
+
         public bool agregarPelicula(string nombre,string genero,int duracion) {
             string querry = $"INSERT INTO Peliculas (Nombre, Duracion, Genero) VALUES ('{nombre}', {duracion}, '{genero}');";
             conexion = new SqlConnection(cadenaConexion);

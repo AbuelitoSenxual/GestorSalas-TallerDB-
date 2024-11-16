@@ -14,8 +14,8 @@ namespace GestorSalas.Vistas
 {
     public partial class EmpleadoFrm : Form
     {
-        Empleado empleado { get; set; }
-        public EmpleadoFrm( Empleado empleado)
+        public Empleado empleado { get; set; }
+        public EmpleadoFrm(Empleado empleado)
         {
             this.empleado = empleado;
             InitializeComponent();
@@ -23,14 +23,19 @@ namespace GestorSalas.Vistas
 
         private void EmpleadoFrm_Load(object sender, EventArgs e)
         {
-            nombreEmtxt.Text = empleado.nombre;
-            puestoEmcbx.SelectedItem = empleado.puesto;
-            usuarioEmtxt.Text = empleado.usuario;
-            contraseñaEmtxt.Text = empleado.contraseña;
+            if (empleado != null)
+            {
+                nombreEmtxt.Text = empleado.nombre;
+                puestoEmcbx.SelectedItem = empleado.puesto;
+                usuarioEmtxt.Text = empleado.usuario;
+                contraseñaEmtxt.Text = empleado.contraseña;
 
+            }
 
-
-
+            puestoEmcbx.Items.Add("Administrador");
+            puestoEmcbx.Items.Add("cajero");
+            puestoEmcbx.Items.Add("Proyectorista");
+            puestoEmcbx.Items.Add("Asistente de sala");
         }
 
         private void cargarEmpleado_Click(object sender, EventArgs e)
@@ -39,16 +44,17 @@ namespace GestorSalas.Vistas
             {
                 MessageBox.Show("Rellene todo los parametros");
             }
-            else {
+            else
+            {
 
                 empleado.nombre = nombreEmtxt.Text;
-                empleado.puesto = usuarioEmtxt.Text;
+                empleado.puesto = puestoEmcbx.SelectedItem.ToString();
                 empleado.usuario = usuarioEmtxt.Text;
                 empleado.contraseña = contraseñaEmtxt.Text;
 
 
                 this.Close();
-            
+
             }
         }
     }

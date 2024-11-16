@@ -41,6 +41,12 @@ namespace GestorSalas
                             this.Show();
 
                         }
+                        else
+                        {
+                           
+                            Application.Exit();
+                        }
+
                     }
                     else {
                         MessageBox.Show("Usuario o Contraseña Erronios");
