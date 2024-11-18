@@ -132,7 +132,7 @@ namespace GestorSalas.Servicios
             DataTable dt = new DataTable();
             conexion = new SqlConnection(cadenaConexion);
 
-            string querry = $"select Fecha,Hora from funciones where ID_Pelicula={id};";
+            string querry = $"select ID_Funcion,Nombre,Fecha,Hora from funciones,Peliculas where Peliculas.ID_Pelicula={id} and  funciones.ID_Pelicula ={id};";
             using (conexion)
             {
                 try
@@ -142,6 +142,8 @@ namespace GestorSalas.Servicios
 
                     // Llenar el DataTable con los datos de la base de datos
                     da.Fill(dt);
+
+                    
                 }
                 catch (Exception ex)
                 {

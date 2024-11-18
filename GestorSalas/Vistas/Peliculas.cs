@@ -84,6 +84,10 @@ namespace GestorSalas
             DataTable dt = baseDatosServicios.peliculasInformacion();
             peliculasDgv.DataSource = dt;
 
+
+
+            peliculasDgv.Columns["ID_Pelicula"].Visible = false;
+
         }
 
 

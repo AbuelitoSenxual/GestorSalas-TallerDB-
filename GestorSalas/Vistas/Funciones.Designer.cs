@@ -44,6 +44,7 @@
             this.btnBuscarAsiento.TabIndex = 2;
             this.btnBuscarAsiento.Text = "Buscar Asiento";
             this.btnBuscarAsiento.UseVisualStyleBackColor = true;
+            this.btnBuscarAsiento.Click += new System.EventHandler(this.btnBuscarAsiento_Click);
             // 
             // btnAtras
             // 
@@ -76,7 +77,7 @@
             this.Name = "Funciones";
             this.Text = "Funciones";
             this.Activated += new System.EventHandler(this.Form3_Activated);
-           
+            this.Load += new System.EventHandler(this.Funciones_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvpelicula)).EndInit();
             this.ResumeLayout(false);
 

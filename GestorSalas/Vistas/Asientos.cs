@@ -10,11 +10,66 @@ using System.Windows.Forms;
 
 namespace GestorSalas
 {
-    public partial class Asientos : Form
+    public partial class btnContinuar : Form
     {
-        public Asientos()
+        private List<Button> botonesSeleccionados = new List<Button>();
+        private string idfuncion;
+        public btnContinuar(string idfuncion)
         {
+            this.idfuncion = idfuncion;
             InitializeComponent();
+
+            foreach (Control control in this.Controls)
+            {
+                if (control is Button)
+                {
+                    control.Click += Boton_Click;
+                }
+            }
+        }
+        private void Boton_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                // Verificar si el botón ya está seleccionado
+                if (botonesSeleccionados.Contains(btn))
+                {
+                    // Desmarcar el botón (quitar selección)
+                    botonesSeleccionados.Remove(btn);
+                    btn.BackColor = Color.LightGray;  // Color original
+                }
+                else
+                {
+                    // Marcar el botón (seleccionado)
+                    botonesSeleccionados.Add(btn);
+                    btn.BackColor = Color.Green;  // Color cuando está seleccionado
+                }
+            }
+        }
+
+        private void Asientos_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBuscarAsiento_Click(object sender, EventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show(
+               "¿Deseas continuar?", // Mensaje
+               "Confirmar acción", // Título
+               MessageBoxButtons.YesNo, // Botones disponibles
+               MessageBoxIcon.Question); // Icono del MessageBox
+
+            // Comprobar la respuesta del usuario
+            if (resultado == DialogResult.Yes)
+            {
+                MessageBox.Show("¡Continuaste la acción!", "Continuar");
+            }
+            else if (resultado == DialogResult.No)
+            {
+                MessageBox.Show("¡Has declinado la acción!", "Declinar");
+            }
         }
     }
 }

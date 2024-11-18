@@ -1,6 +1,6 @@
 ﻿namespace GestorSalas
 {
-    partial class Asientos
+    partial class btnContinuar
     {
         /// <summary>
         /// Required designer variable.
@@ -46,6 +46,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblB = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnBuscarAsiento = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -204,11 +205,24 @@
             this.label5.TabIndex = 17;
             this.label5.Text = "C";
             // 
-            // Form4
+            // btnBuscarAsiento
+            // 
+            this.btnBuscarAsiento.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscarAsiento.Location = new System.Drawing.Point(171, 298);
+            this.btnBuscarAsiento.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnBuscarAsiento.Name = "btnBuscarAsiento";
+            this.btnBuscarAsiento.Size = new System.Drawing.Size(133, 56);
+            this.btnBuscarAsiento.TabIndex = 18;
+            this.btnBuscarAsiento.Text = "Continuar";
+            this.btnBuscarAsiento.UseVisualStyleBackColor = true;
+            this.btnBuscarAsiento.Click += new System.EventHandler(this.btnBuscarAsiento_Click);
+            // 
+            // btnContinuar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(477, 391);
+            this.Controls.Add(this.btnBuscarAsiento);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lblB);
             this.Controls.Add(this.label3);
@@ -227,8 +241,9 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "Form4";
+            this.Name = "btnContinuar";
             this.Text = "Form4";
+            this.Load += new System.EventHandler(this.Asientos_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,5 +269,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblB;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnBuscarAsiento;
     }
 }
