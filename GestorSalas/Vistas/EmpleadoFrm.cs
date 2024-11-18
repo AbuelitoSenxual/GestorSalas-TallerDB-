@@ -32,10 +32,10 @@ namespace GestorSalas.Vistas
 
             }
 
-            puestoEmcbx.Items.Add("Administrador");
-            puestoEmcbx.Items.Add("cajero");
-            puestoEmcbx.Items.Add("Proyectorista");
-            puestoEmcbx.Items.Add("Asistente de sala");
+            puestoEmcbx.Items.Add("Gerente");
+            puestoEmcbx.Items.Add("Subgerente");
+            puestoEmcbx.Items.Add("Cajero");
+            puestoEmcbx.Items.Add("Taquillero");
         }
 
         private void cargarEmpleado_Click(object sender, EventArgs e)
@@ -56,6 +56,11 @@ namespace GestorSalas.Vistas
                 this.Close();
 
             }
+        }
+
+        private void puestoEmcbx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

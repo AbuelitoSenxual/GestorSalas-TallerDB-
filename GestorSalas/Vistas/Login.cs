@@ -1,13 +1,5 @@
 ﻿using GestorSalas.Servicios;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GestorSalas
@@ -27,41 +19,45 @@ namespace GestorSalas
             string contraseña = txtContraseña.Text;
             baseDatosServicios baseDatosServ = new baseDatosServicios();
 
-            if (baseDatosServ.probarConexion()) {
+            if (baseDatosServ.probarConexion())
+            {
                 if (usuario != "" && contraseña != "")
                 {
                     //
                     if (baseDatosServ.verificarUsuario(usuario, contraseña))
                     {
-                        Peliculas peliculas = new Peliculas(baseDatosServ.inicializarEmpleado(usuario,contraseña));
+                        Peliculas peliculas = new Peliculas(baseDatosServ.inicializarEmpleado(usuario, contraseña));
                         this.Hide();
                         peliculas.Owner = this;
-                        if (peliculas.ShowDialog() == DialogResult.OK) {
+                        if (peliculas.ShowDialog() == DialogResult.OK)
+                        {
                             txtUsuario.Text = txtContraseña.Text = null;
                             this.Show();
 
                         }
                         else
                         {
-                           
+
                             Application.Exit();
                         }
 
                     }
-                    else {
-                        MessageBox.Show("Usuario o Contraseña Erronios");
+                    else
+                    {
+                        MessageBox.Show("Usuario o Contraseña Incorrectos");
                         txtUsuario.Text = txtContraseña.Text = null;
 
                     }
                 }
-                else {
-                    MessageBox.Show("Profavor rellene todos los campos");
+                else
+                {
+                    MessageBox.Show("No deje campos vacios");
 
 
                 }
 
-  
-            
+
+
             }
 
 

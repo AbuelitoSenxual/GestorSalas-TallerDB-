@@ -1,20 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using GestorSalas.Servicios;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GestorSalas
 {
-    public partial class Form3 : Form
+    public partial class Funciones : Form
     {
-        public Form3()
+        private string idPelicula;
+
+        public Funciones(string idPelicula)
         {
-            InitializeComponent();
+            this.idPelicula = idPelicula;
+        }
+
+        private void Form3_Activated(object sender, EventArgs e)
+        {
+
+            baseDatosServicios baseDatosServicios = new baseDatosServicios();
+
+            DataTable dt = baseDatosServicios.HorarioPeliocula(idPelicula);
+            dgvpelicula.DataSource = dt;
+        }
+
+      
+
+        private void btnAtras_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

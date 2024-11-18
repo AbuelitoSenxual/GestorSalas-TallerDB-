@@ -87,6 +87,7 @@
             this.puestoEmcbx.Name = "puestoEmcbx";
             this.puestoEmcbx.Size = new System.Drawing.Size(121, 21);
             this.puestoEmcbx.TabIndex = 8;
+            this.puestoEmcbx.SelectedIndexChanged += new System.EventHandler(this.puestoEmcbx_SelectedIndexChanged);
             // 
             // contraseñaEmlbl
             // 

@@ -15,11 +15,13 @@ namespace GestorSalas.Servicios
     {
         private string usuario = "sa";
         private string contraseña = "1234";
+        private string server = "DESKTOP-L5UGVKJ\\SQLEXPRESS";
         private string cadenaConexion;
         private SqlConnection conexion;
         public baseDatosServicios()
         {
-            cadenaConexion = $"Server=DESKTOP-IPBG7ER\\SQLEXPRESS; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
+            cadenaConexion = $"Server=DESKTOP-L5UGVKJ\\SQLEXPRESS; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
+            //cadenaConexion = $"Server={server}; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
             //usa esta y cambia la contrasena y usuario
             //cadenaConexion = $"Server=localhost; Database=GestorSalas; User Id={usuario}; Password={contraseña}; TrustServerCertificate=True;";
 
@@ -119,7 +121,38 @@ namespace GestorSalas.Servicios
                 }
             }
 
+
+
             
+            return dt;
+        }
+        public DataTable HorarioPeliocula(string id )
+        {
+
+            DataTable dt = new DataTable();
+            conexion = new SqlConnection(cadenaConexion);
+
+            string querry = $"select Fecha,Hora from funciones where ID_Pelicula={id};";
+            using (conexion)
+            {
+                try
+                {
+                    // Crear un adaptador SQL
+                    SqlDataAdapter da = new SqlDataAdapter(querry, conexion);
+
+                    // Llenar el DataTable con los datos de la base de datos
+                    da.Fill(dt);
+                }
+                catch (Exception ex)
+                {
+                    // En caso de error, mostrar el mensaje de error
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+
+
+
+
             return dt;
         }
         public DataTable empleadoInformacion()
