@@ -227,6 +227,11 @@ namespace GestorSalas
                 this.Show();
             }
         }
+
+        private void Peliculas_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
     

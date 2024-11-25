@@ -73,6 +73,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestión de Películas";
             this.Activated += new System.EventHandler(this.Peliculas_Activated_1);
+            this.Load += new System.EventHandler(this.Peliculas_Load_1);
             this.ResumeLayout(false);
 
         }
