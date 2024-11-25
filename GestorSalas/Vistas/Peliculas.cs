@@ -80,13 +80,7 @@ namespace GestorSalas
 
         private void Peliculas_Activated(object sender, EventArgs e)
         {
-            baseDatosServicios baseDatosServicios = new baseDatosServicios();
-            DataTable dt = baseDatosServicios.peliculasInformacion();
-            peliculasDgv.DataSource = dt;
-
-
-
-            peliculasDgv.Columns["ID_Pelicula"].Visible = false;
+   
 
         }
 
@@ -112,6 +106,17 @@ namespace GestorSalas
 
 
 
+        }
+
+        private void Peliculas_Activated_1(object sender, EventArgs e)
+        {
+            baseDatosServicios baseDatosServicios = new baseDatosServicios();
+            DataTable dt = baseDatosServicios.peliculasInformacion();
+            peliculasDgv.DataSource = dt;
+
+
+
+            peliculasDgv.Columns["ID_Pelicula"].Visible = false;
         }
     }
 }

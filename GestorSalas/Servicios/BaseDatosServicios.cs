@@ -20,10 +20,11 @@ namespace GestorSalas.Servicios
         private SqlConnection conexion;
         public baseDatosServicios()
         {
-            cadenaConexion = $"Server=DESKTOP-L5UGVKJ\\SQLEXPRESS; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
+            //4:30
+            //cadenaConexion = $"Server=DESKTOP-L5UGVKJ\\SQLEXPRESS; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
             //cadenaConexion = $"Server={server}; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
             //usa esta y cambia la contrasena y usuario
-            //cadenaConexion = $"Server=localhost; Database=GestorSalas; User Id={usuario}; Password={contraseña}; TrustServerCertificate=True;";
+            cadenaConexion = $"Server=localhost; Database=GestorSalas; User Id={usuario}; Password={contraseña}; TrustServerCertificate=True;";
 
 
 

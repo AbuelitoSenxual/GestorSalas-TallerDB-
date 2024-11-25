@@ -32,7 +32,8 @@ namespace GestorSalas
 
         private void btnAtras_Click(object sender, EventArgs e)
         {
-
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void Funciones_Load(object sender, EventArgs e)

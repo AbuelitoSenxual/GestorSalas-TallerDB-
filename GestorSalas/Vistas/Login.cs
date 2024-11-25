@@ -15,6 +15,18 @@ namespace GestorSalas
         private void btnIngresar_Click(object sender, EventArgs e)
         {
 
+
+
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnIngresar_Click_1(object sender, EventArgs e)
+        {
+
             string usuario = txtUsuario.Text;
             string contraseña = txtContraseña.Text;
             baseDatosServicios baseDatosServ = new baseDatosServicios();
@@ -59,13 +71,6 @@ namespace GestorSalas
 
 
             }
-
-
-        }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

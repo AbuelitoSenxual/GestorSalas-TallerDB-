@@ -37,38 +37,47 @@
             // 
             // btnCambiarUsuario
             // 
-            this.btnCambiarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCambiarUsuario.Location = new System.Drawing.Point(519, 308);
-            this.btnCambiarUsuario.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnCambiarUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.btnCambiarUsuario.FlatAppearance.BorderSize = 0;
+            this.btnCambiarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCambiarUsuario.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnCambiarUsuario.ForeColor = System.Drawing.Color.White;
+            this.btnCambiarUsuario.Location = new System.Drawing.Point(550, 320);
             this.btnCambiarUsuario.Name = "btnCambiarUsuario";
-            this.btnCambiarUsuario.Size = new System.Drawing.Size(182, 100);
-            this.btnCambiarUsuario.TabIndex = 0;
+            this.btnCambiarUsuario.Size = new System.Drawing.Size(200, 50);
+            this.btnCambiarUsuario.TabIndex = 1;
             this.btnCambiarUsuario.Text = "Cambiar Usuario";
-            this.btnCambiarUsuario.UseVisualStyleBackColor = true;
+            this.btnCambiarUsuario.UseVisualStyleBackColor = false;
             this.btnCambiarUsuario.Click += new System.EventHandler(this.btnCambiarUsuario_Click);
             // 
             // btnBuscarFuncion
             // 
-            this.btnBuscarFuncion.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscarFuncion.Location = new System.Drawing.Point(519, 24);
-            this.btnBuscarFuncion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnBuscarFuncion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
+            this.btnBuscarFuncion.FlatAppearance.BorderSize = 0;
+            this.btnBuscarFuncion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscarFuncion.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnBuscarFuncion.ForeColor = System.Drawing.Color.White;
+            this.btnBuscarFuncion.Location = new System.Drawing.Point(550, 50);
             this.btnBuscarFuncion.Name = "btnBuscarFuncion";
-            this.btnBuscarFuncion.Size = new System.Drawing.Size(182, 100);
-            this.btnBuscarFuncion.TabIndex = 1;
-            this.btnBuscarFuncion.Text = "Buscar Funcion";
-            this.btnBuscarFuncion.UseVisualStyleBackColor = true;
+            this.btnBuscarFuncion.Size = new System.Drawing.Size(200, 50);
+            this.btnBuscarFuncion.TabIndex = 2;
+            this.btnBuscarFuncion.Text = "Buscar Función";
+            this.btnBuscarFuncion.UseVisualStyleBackColor = false;
             this.btnBuscarFuncion.Click += new System.EventHandler(this.btnBuscarFuncion_Click);
             // 
             // gestionarBaseBtn
             // 
-            this.gestionarBaseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gestionarBaseBtn.Location = new System.Drawing.Point(519, 172);
-            this.gestionarBaseBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gestionarBaseBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
+            this.gestionarBaseBtn.FlatAppearance.BorderSize = 0;
+            this.gestionarBaseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gestionarBaseBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.gestionarBaseBtn.ForeColor = System.Drawing.Color.White;
+            this.gestionarBaseBtn.Location = new System.Drawing.Point(550, 180);
             this.gestionarBaseBtn.Name = "gestionarBaseBtn";
-            this.gestionarBaseBtn.Size = new System.Drawing.Size(182, 100);
+            this.gestionarBaseBtn.Size = new System.Drawing.Size(200, 50);
             this.gestionarBaseBtn.TabIndex = 3;
             this.gestionarBaseBtn.Text = "Gestionar Base";
-            this.gestionarBaseBtn.UseVisualStyleBackColor = true;
+            this.gestionarBaseBtn.UseVisualStyleBackColor = false;
             this.gestionarBaseBtn.Click += new System.EventHandler(this.gestionarBaseBtn_Click);
             // 
             // peliculasDgv
@@ -77,33 +86,35 @@
             this.peliculasDgv.AllowUserToDeleteRows = false;
             this.peliculasDgv.AllowUserToResizeColumns = false;
             this.peliculasDgv.AllowUserToResizeRows = false;
+            this.peliculasDgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.peliculasDgv.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.peliculasDgv.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.peliculasDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.peliculasDgv.Location = new System.Drawing.Point(31, 24);
+            this.peliculasDgv.Location = new System.Drawing.Point(20, 20);
             this.peliculasDgv.Name = "peliculasDgv";
             this.peliculasDgv.ReadOnly = true;
-            this.peliculasDgv.Size = new System.Drawing.Size(440, 384);
-            this.peliculasDgv.TabIndex = 4;
-            this.peliculasDgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.peliculasDgv_CellClick_1);
+            this.peliculasDgv.RowHeadersWidth = 51;
+            this.peliculasDgv.Size = new System.Drawing.Size(500, 400);
+            this.peliculasDgv.TabIndex = 0;
             // 
             // Peliculas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(773, 489);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.ClientSize = new System.Drawing.Size(800, 500);
             this.Controls.Add(this.peliculasDgv);
-            this.Controls.Add(this.gestionarBaseBtn);
-            this.Controls.Add(this.btnBuscarFuncion);
             this.Controls.Add(this.btnCambiarUsuario);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Controls.Add(this.btnBuscarFuncion);
+            this.Controls.Add(this.gestionarBaseBtn);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Peliculas";
-            this.Text = "Peliculas";
-            this.Activated += new System.EventHandler(this.Peliculas_Activated);
-            this.Load += new System.EventHandler(this.Peliculas_Load);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Gestión de Películas";
+            this.Activated += new System.EventHandler(this.Peliculas_Activated_1);
             ((System.ComponentModel.ISupportInitialize)(this.peliculasDgv)).EndInit();
             this.ResumeLayout(false);
 
         }
+
 
         #endregion
 
