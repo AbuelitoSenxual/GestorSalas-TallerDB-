@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modelos\Empleado.cs" />
+    <Compile Include="Modelos\FuncionesModelo.cs" />
     <Compile Include="Servicios\BaseDatosServicios.cs" />
+    <Compile Include="Servicios\GenerarTicketServicio.cs" />
     <Compile Include="Vistas\AgregarPelicualas.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -41,7 +41,7 @@
             this.lblUsuario.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblUsuario.Location = new System.Drawing.Point(50, 50);
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(155, 23);
+            this.lblUsuario.Size = new System.Drawing.Size(131, 19);
             this.lblUsuario.TabIndex = 0;
             this.lblUsuario.Text = "Usuario Empleado";
             // 
@@ -51,7 +51,7 @@
             this.txtUsuario.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtUsuario.Location = new System.Drawing.Point(50, 80);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(300, 30);
+            this.txtUsuario.Size = new System.Drawing.Size(300, 25);
             this.txtUsuario.TabIndex = 1;
             // 
             // lblContraseña
@@ -60,7 +60,7 @@
             this.lblContraseña.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblContraseña.Location = new System.Drawing.Point(50, 130);
             this.lblContraseña.Name = "lblContraseña";
-            this.lblContraseña.Size = new System.Drawing.Size(184, 23);
+            this.lblContraseña.Size = new System.Drawing.Size(155, 19);
             this.lblContraseña.TabIndex = 2;
             this.lblContraseña.Text = "Contraseña Empleado";
             // 
@@ -71,7 +71,7 @@
             this.txtContraseña.Location = new System.Drawing.Point(50, 167);
             this.txtContraseña.Name = "txtContraseña";
             this.txtContraseña.PasswordChar = '*';
-            this.txtContraseña.Size = new System.Drawing.Size(300, 30);
+            this.txtContraseña.Size = new System.Drawing.Size(300, 25);
             this.txtContraseña.TabIndex = 3;
             // 
             // btnIngresar
@@ -102,6 +102,7 @@
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login - Gestor Salas";
+            this.Load += new System.EventHandler(this.Login_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestorSalas.Servicios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,9 +15,12 @@ namespace GestorSalas
     {
         private List<Button> botonesSeleccionados = new List<Button>();
         private string idfuncion;
-        public btnContinuar(string idfuncion)
+        public GenerarTicketServicio GenerarTicketServicio;
+        public btnContinuar(string idfuncion, GenerarTicketServicio generarTicketServicio)
         {
+
             this.idfuncion = idfuncion;
+            GenerarTicketServicio = generarTicketServicio;
             InitializeComponent();
 
             foreach (Control control in this.Controls)
@@ -27,6 +31,12 @@ namespace GestorSalas
                 }
             }
         }
+        public List<string> ObtenerNombresBotonesSeleccionados()
+        {
+            // Devolver los nombres de los botones seleccionados
+            return botonesSeleccionados.Select(btn => btn.Name).ToList();
+        }
+
         private void Boton_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
@@ -60,15 +70,19 @@ namespace GestorSalas
                "Confirmar acción", // Título
                MessageBoxButtons.YesNo, // Botones disponibles
                MessageBoxIcon.Question); // Icono del MessageBox
-
+            GenerarTicketServicio.asientos = ObtenerNombresBotonesSeleccionados();
+            
+            
             // Comprobar la respuesta del usuario
             if (resultado == DialogResult.Yes)
             {
-                MessageBox.Show("¡Continuaste la acción!", "Continuar");
+                MessageBox.Show(GenerarTicketServicio.ImprimirTickets(), "Continuar");
+                this.Close();
             }
             else if (resultado == DialogResult.No)
             {
                 MessageBox.Show("¡Has declinado la acción!", "Declinar");
+                this.Close();
             }
         }
     }

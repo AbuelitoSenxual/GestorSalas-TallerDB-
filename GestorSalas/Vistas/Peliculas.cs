@@ -29,6 +29,17 @@ namespace GestorSalas
 
         private void btnBuscarFuncion_Click(object sender, EventArgs e)
         {
+
+
+            FuncionesModelo funcionesModelo = new FuncionesModelo();
+            GenerarTicketServicio ticketServicio = new GenerarTicketServicio();
+            
+
+
+
+
+
+
             // Verifica si hay alguna fila seleccionada
             if (peliculasDgv.CurrentRow != null)
             {
@@ -39,9 +50,15 @@ namespace GestorSalas
                 string idPelicula = filaSeleccionada.Cells["ID_Pelicula"].Value.ToString();
                 Console.WriteLine($"ID de la película seleccionada: {idPelicula}");
 
-                // Crea una instancia del siguiente formulario y pasa el ID
-                Funciones funciones = new Funciones(idPelicula);
+                funcionesModelo.pelicula = filaSeleccionada.Cells["Nombre"].Value.ToString();
 
+
+                ticketServicio.funciones = funcionesModelo;
+                // Crea una instancia del siguiente formulario y pasa el ID
+                Funciones funciones = new Funciones(idPelicula, ticketServicio);
+
+
+                
                 this.Hide();
                 funciones.Owner = this;
                 funciones.ShowDialog();
@@ -104,8 +121,6 @@ namespace GestorSalas
             //    funciones.ShowDialog();
             //    this.Show();
 
-
-
         }
 
         private void Peliculas_Activated_1(object sender, EventArgs e)
@@ -113,9 +128,6 @@ namespace GestorSalas
             baseDatosServicios baseDatosServicios = new baseDatosServicios();
             DataTable dt = baseDatosServicios.peliculasInformacion();
             peliculasDgv.DataSource = dt;
-
-
-
             peliculasDgv.Columns["ID_Pelicula"].Visible = false;
         }
     }

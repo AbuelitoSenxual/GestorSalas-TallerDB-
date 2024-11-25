@@ -7,12 +7,14 @@ namespace GestorSalas
 {
     public partial class Funciones : Form
     {
-        private string idPelicula;
+        public string idPelicula;
+        public GenerarTicketServicio GenerarTicketServicio;
 
-        public Funciones(string idPelicula)
+        public Funciones(string idPelicula, GenerarTicketServicio generarTicketServicio)
         {
             InitializeComponent();
             this.idPelicula = idPelicula;
+            GenerarTicketServicio = generarTicketServicio;
         }
 
         private void Form3_Activated(object sender, EventArgs e)
@@ -53,8 +55,14 @@ namespace GestorSalas
                 string ID_Funcion = filaSeleccionada.Cells["ID_Funcion"].Value.ToString();
                 Console.WriteLine($"ID de la funcion seleccionada: {ID_Funcion}");
 
+                GenerarTicketServicio.funciones.Hora = filaSeleccionada.Cells["Hora"].Value.ToString();
+
+
+
+
                 // Crea una instancia del siguiente formulario y pasa el ID
-                btnContinuar funciones = new btnContinuar(ID_Funcion);
+                btnContinuar funciones = new btnContinuar(ID_Funcion, GenerarTicketServicio);
+
 
                 this.Hide();
                 funciones.Owner = this;
