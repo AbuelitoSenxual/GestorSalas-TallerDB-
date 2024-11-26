@@ -65,6 +65,7 @@
             this.dgvpelicula.Name = "dgvpelicula";
             this.dgvpelicula.Size = new System.Drawing.Size(494, 385);
             this.dgvpelicula.TabIndex = 4;
+            this.dgvpelicula.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvpelicula_CellContentClick);
             // 
             // Funciones
             // 

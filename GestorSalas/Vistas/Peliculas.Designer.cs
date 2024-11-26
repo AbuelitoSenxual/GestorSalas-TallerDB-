@@ -39,7 +39,7 @@
             this.btnCambiarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCambiarUsuario.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnCambiarUsuario.ForeColor = System.Drawing.Color.White;
-            this.btnCambiarUsuario.Location = new System.Drawing.Point(386, 27);
+            this.btnCambiarUsuario.Location = new System.Drawing.Point(509, 49);
             this.btnCambiarUsuario.Name = "btnCambiarUsuario";
             this.btnCambiarUsuario.Size = new System.Drawing.Size(200, 50);
             this.btnCambiarUsuario.TabIndex = 1;
@@ -49,12 +49,13 @@
             // 
             // gestionarBaseBtn
             // 
+
             this.gestionarBaseBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
             this.gestionarBaseBtn.FlatAppearance.BorderSize = 0;
             this.gestionarBaseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gestionarBaseBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.gestionarBaseBtn.ForeColor = System.Drawing.Color.White;
-            this.gestionarBaseBtn.Location = new System.Drawing.Point(39, 27);
+            this.gestionarBaseBtn.Location = new System.Drawing.Point(509, 360);
             this.gestionarBaseBtn.Name = "gestionarBaseBtn";
             this.gestionarBaseBtn.Size = new System.Drawing.Size(200, 50);
             this.gestionarBaseBtn.TabIndex = 3;
@@ -64,8 +65,9 @@
             // 
             // Peliculas
             // 
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.ClientSize = new System.Drawing.Size(680, 587);
+
+            this.BackColor = System.Drawing.ColorTranslator.FromHtml("#201e1f");
+            this.ClientSize = new System.Drawing.Size(732, 559);
             this.Controls.Add(this.btnCambiarUsuario);
             this.Controls.Add(this.gestionarBaseBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

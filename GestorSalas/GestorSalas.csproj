@@ -48,8 +48,15 @@
   <ItemGroup>
     <Compile Include="Modelos\Empleado.cs" />
     <Compile Include="Modelos\FuncionesModelo.cs" />
+    <Compile Include="Modelos\Pelicula.cs" />
     <Compile Include="Servicios\BaseDatosServicios.cs" />
     <Compile Include="Servicios\GenerarTicketServicio.cs" />
+    <Compile Include="Vistas\AdministradorPeliculas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\AdministradorPeliculas.Designer.cs">
+      <DependentUpon>AdministradorPeliculas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\AgregarPelicualas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +87,12 @@
     <Compile Include="Vistas\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\ModificarPelicula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\ModificarPelicula.Designer.cs">
+      <DependentUpon>ModificarPelicula.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Peliculas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,12 +113,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vistas\PeliculasIMG.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\PeliculasIMG.Designer.cs">
-      <DependentUpon>PeliculasIMG.cs</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="Vistas\AdministradorPeliculas.resx">
+      <DependentUpon>AdministradorPeliculas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\AgregarPelicualas.resx">
       <DependentUpon>AgregarPelicualas.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\ModificarPelicula.resx">
+      <DependentUpon>ModificarPelicula.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Peliculas.resx">
       <DependentUpon>Peliculas.cs</DependentUpon>
@@ -138,10 +151,8 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Vistas\PeliculasIMG.resx">
-      <DependentUpon>PeliculasIMG.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -165,6 +176,9 @@
     <Content Include="Assets\Mi Villano Favorito.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Untitled design1.jpg" />
+    <None Include="Resources\Untitled design.jpg" />
+    <None Include="Resources\images.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

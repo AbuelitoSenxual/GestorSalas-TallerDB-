@@ -44,39 +44,35 @@
             // 
             // nombrepTxb
             // 
-            this.nombrepTxb.Location = new System.Drawing.Point(107, 49);
-            this.nombrepTxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nombrepTxb.Location = new System.Drawing.Point(80, 40);
             this.nombrepTxb.Name = "nombrepTxb";
-            this.nombrepTxb.Size = new System.Drawing.Size(160, 22);
+            this.nombrepTxb.Size = new System.Drawing.Size(121, 20);
             this.nombrepTxb.TabIndex = 0;
             // 
             // NombreP
             // 
             this.NombreP.AutoSize = true;
-            this.NombreP.Location = new System.Drawing.Point(323, 53);
-            this.NombreP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.NombreP.Location = new System.Drawing.Point(242, 43);
             this.NombreP.Name = "NombreP";
-            this.NombreP.Size = new System.Drawing.Size(56, 16);
+            this.NombreP.Size = new System.Drawing.Size(44, 13);
             this.NombreP.TabIndex = 1;
             this.NombreP.Text = "Nombre";
             // 
             // GeneroP
             // 
             this.GeneroP.AutoSize = true;
-            this.GeneroP.Location = new System.Drawing.Point(323, 100);
-            this.GeneroP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.GeneroP.Location = new System.Drawing.Point(242, 81);
             this.GeneroP.Name = "GeneroP";
-            this.GeneroP.Size = new System.Drawing.Size(52, 16);
+            this.GeneroP.Size = new System.Drawing.Size(42, 13);
             this.GeneroP.TabIndex = 3;
             this.GeneroP.Text = "Genero";
             // 
             // DuracionP
             // 
             this.DuracionP.AutoSize = true;
-            this.DuracionP.Location = new System.Drawing.Point(323, 148);
-            this.DuracionP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.DuracionP.Location = new System.Drawing.Point(242, 120);
             this.DuracionP.Name = "DuracionP";
-            this.DuracionP.Size = new System.Drawing.Size(110, 16);
+            this.DuracionP.Size = new System.Drawing.Size(89, 13);
             this.DuracionP.TabIndex = 5;
             this.DuracionP.Text = "Duracion minutos";
             // 
@@ -84,26 +80,23 @@
             // 
             this.generoCbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.generoCbx.FormattingEnabled = true;
-            this.generoCbx.Location = new System.Drawing.Point(107, 100);
-            this.generoCbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.generoCbx.Location = new System.Drawing.Point(80, 81);
             this.generoCbx.Name = "generoCbx";
-            this.generoCbx.Size = new System.Drawing.Size(160, 24);
+            this.generoCbx.Size = new System.Drawing.Size(121, 21);
             this.generoCbx.TabIndex = 6;
             // 
             // duracionPud
             // 
-            this.duracionPud.Location = new System.Drawing.Point(108, 145);
-            this.duracionPud.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.duracionPud.Location = new System.Drawing.Point(81, 118);
             this.duracionPud.Name = "duracionPud";
-            this.duracionPud.Size = new System.Drawing.Size(160, 22);
+            this.duracionPud.Size = new System.Drawing.Size(120, 20);
             this.duracionPud.TabIndex = 7;
             // 
             // agregarPbtn
             // 
-            this.agregarPbtn.Location = new System.Drawing.Point(149, 261);
-            this.agregarPbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.agregarPbtn.Location = new System.Drawing.Point(112, 212);
             this.agregarPbtn.Name = "agregarPbtn";
-            this.agregarPbtn.Size = new System.Drawing.Size(100, 28);
+            this.agregarPbtn.Size = new System.Drawing.Size(75, 23);
             this.agregarPbtn.TabIndex = 8;
             this.agregarPbtn.Text = "Agregar";
             this.agregarPbtn.UseVisualStyleBackColor = true;
@@ -111,9 +104,10 @@
             // 
             // imagenPelBtn
             // 
-            this.imagenPelBtn.Location = new System.Drawing.Point(300, 207);
+            this.imagenPelBtn.Location = new System.Drawing.Point(225, 168);
+            this.imagenPelBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.imagenPelBtn.Name = "imagenPelBtn";
-            this.imagenPelBtn.Size = new System.Drawing.Size(136, 24);
+            this.imagenPelBtn.Size = new System.Drawing.Size(102, 20);
             this.imagenPelBtn.TabIndex = 9;
             this.imagenPelBtn.Text = "Importar imagen";
             this.imagenPelBtn.UseVisualStyleBackColor = true;
@@ -127,17 +121,18 @@
             // 
             // RutaImagenTxt
             // 
-            this.RutaImagenTxt.Location = new System.Drawing.Point(107, 207);
+            this.RutaImagenTxt.Location = new System.Drawing.Point(80, 168);
+            this.RutaImagenTxt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RutaImagenTxt.Name = "RutaImagenTxt";
             this.RutaImagenTxt.ReadOnly = true;
-            this.RutaImagenTxt.Size = new System.Drawing.Size(161, 22);
+            this.RutaImagenTxt.Size = new System.Drawing.Size(122, 20);
             this.RutaImagenTxt.TabIndex = 10;
             // 
             // AgregarPelicualas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(448, 315);
+            this.ClientSize = new System.Drawing.Size(336, 256);
             this.Controls.Add(this.RutaImagenTxt);
             this.Controls.Add(this.imagenPelBtn);
             this.Controls.Add(this.agregarPbtn);
@@ -147,9 +142,10 @@
             this.Controls.Add(this.GeneroP);
             this.Controls.Add(this.NombreP);
             this.Controls.Add(this.nombrepTxb);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AgregarPelicualas";
             this.Text = "AggregarPelicualas";
+            this.Activated += new System.EventHandler(this.AgregarPelicualas_Activated);
             this.Load += new System.EventHandler(this.AgregarPelicualas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.duracionPud)).EndInit();
             this.ResumeLayout(false);

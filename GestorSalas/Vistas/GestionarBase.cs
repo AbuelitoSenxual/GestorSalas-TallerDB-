@@ -26,8 +26,9 @@ namespace GestorSalas.Vistas
         private void gesPeliculaBtn_Click(object sender, EventArgs e)
         {
 
-            AgregarPelicualas agregarPelicualas = new AgregarPelicualas();
-            agregarPelicualas.ShowDialog();
+            AdministradorPeliculas administradorPeliculas = new AdministradorPeliculas();
+
+           administradorPeliculas.ShowDialog();
 
         }
 
@@ -39,5 +40,7 @@ namespace GestorSalas.Vistas
             this.Show();
 
         }
+
+      
     }
 }

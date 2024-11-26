@@ -73,7 +73,7 @@ namespace GestorSalas
             }
         }
 
-        private void Login_Load_1(object sender, EventArgs e)
+        private void lblUsuario_Click(object sender, EventArgs e)
         {
 
         }

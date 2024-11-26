@@ -77,7 +77,7 @@ namespace GestorSalas.Vistas
             }
             else
             {
-                MessageBox.Show("Por favor, seleccione una fila para eliminar.");
+                MessageBox.Show("Por favor, seleccione una fila para modificar.");
             }
         }
 

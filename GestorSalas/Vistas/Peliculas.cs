@@ -133,61 +133,60 @@ namespace GestorSalas
 
         private void Peliculas_Activated_1(object sender, EventArgs e)
         {
- 
+
             DataTable dt = baseDatosServicios.peliculasInformacion();
 
-      //limpieza de PictureBox
+            // Limpieza de PictureBox
             panelPeliculas.Controls.Clear();
 
-            // desplazamiento vertical
-            int yOffset = 100;
-            int xOffset = 10;
+            // Configuración para el desplazamiento y disposición
+            int yOffset = 10;  // Espacio vertical inicial
+            int xOffset = 10;  // Espacio horizontal inicial
+            int espacioHorizontal = 10; // Espacio entre columnas
+            int espacioVertical = 10; // Espacio entre filas
+            int contadorColumnas = 0; // Contador para columnas
+            int maxColumnas = 3; // Máximo número de columnas por fila
 
-            // Iterariones
+            // Iteraciones para agregar películas
             foreach (DataRow row in dt.Rows)
             {
-                
-
-
-
                 string nombrePelicula = row["Nombre"].ToString();
                 string idPelicula = row["ID_Pelicula"].ToString();
-
                 string imagePath = Path.Combine(Application.StartupPath, "Assets", nombrePelicula + ".jpg");
-
-             
-
-
 
                 if (File.Exists(imagePath))
                 {
                     // Crear un nuevo PictureBox para cada película
                     PictureBox pictureBox = new PictureBox
                     {
-                        Width = 150,  
-                        Height = 200, 
-                        Left = xOffset,    
-                        Top = yOffset, 
-                        ImageLocation = imagePath, 
+                        Width = 150,
+                        Height = 200,
+                        Left = xOffset,
+                        Top = yOffset,
+                        ImageLocation = imagePath,
                         SizeMode = PictureBoxSizeMode.StretchImage // Ajuste de imagen
                     };
 
                     pictureBox.Tag = new { ID_Pelicula = idPelicula, Nombre = nombrePelicula };
                     pictureBox.Click += new EventHandler(PictureBox_Click);
 
-
-
-           
+                    // Agregar el PictureBox al panel
                     panelPeliculas.Controls.Add(pictureBox);
 
-                   
-             
-                    xOffset += pictureBox.Width + 10;
+                    // Actualizar posición horizontal para la siguiente imagen
+                    xOffset += pictureBox.Width + espacioHorizontal;
+                    contadorColumnas++;
 
+                    // Si alcanza el número máximo de columnas, reinicia horizontal y avanza a la siguiente fila
+                    if (contadorColumnas >= maxColumnas)
+                    {
+                        contadorColumnas = 0;
+                        xOffset = 10; // Reiniciar posición horizontal
+                        yOffset += pictureBox.Height + espacioVertical; // Avanzar en posición vertical
+                    }
                 }
                 else
                 {
-                   
                     Console.WriteLine($"Imagen no encontrada para la película: {nombrePelicula}");
                 }
             }

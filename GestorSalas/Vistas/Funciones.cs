@@ -74,5 +74,10 @@ namespace GestorSalas
                 MessageBox.Show("Por favor, selecciona una película.");
             }
         }
+
+        private void dgvpelicula_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

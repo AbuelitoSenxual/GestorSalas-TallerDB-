@@ -206,6 +206,35 @@ namespace GestorSalas.Servicios
                 }
             }
         }
+
+        public void eliminarPelicula(string Idpelicula)
+        {
+            conexion = new SqlConnection(cadenaConexion);
+
+            string query = "DELETE FROM Peliculas WHERE ID_Pelicula = @IdPelicula";
+
+            using (conexion)
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(query, conexion);
+
+                    // Añadir el parámetro a la consulta
+                    cmd.Parameters.AddWithValue("@IdPelicula", Idpelicula);
+
+                    conexion.Open();
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Película eliminada correctamente.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al eliminar Película: " + ex.Message);
+                }
+            }
+        }
+
+
         public void InsertarEmpleado(Empleado empleado)
         {
             conexion = new SqlConnection(cadenaConexion);
@@ -276,6 +305,49 @@ namespace GestorSalas.Servicios
                         // Ejecutar la actualización
                         int filasAfectadas = cmd.ExecuteNonQuery();
 
+                        if (filasAfectadas > 0)
+                        {
+                            Console.WriteLine("Empleado actualizado con éxito.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("No se encontró el empleado con el ID proporcionado.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al actualizar el empleado: " + ex.Message);
+                }
+            }
+        }
+        public void ActualizarPelicula(Pelicula pelicula)
+        {
+            conexion = new SqlConnection(cadenaConexion);
+            using (conexion)
+            {
+                try
+                {
+                    conexion.Open();
+
+                    string query = "UPDATE [GestorSalas].[dbo].[Peliculas] SET " +
+                    "[Nombre] = @Nombre, " +
+                    "[Duracion] = @Duracion, " +
+                    "[Genero] = @Genero " +
+                    "WHERE [ID_Pelicula] = @ID_Pelicula";
+
+                  
+
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        // Parametrizar la consulta para evitar SQL Injection
+                        cmd.Parameters.AddWithValue("@Nombre", pelicula.nombre);
+                        cmd.Parameters.AddWithValue("@Duracion", pelicula.Duracion);
+                        cmd.Parameters.AddWithValue("@Genero", pelicula.Genero);
+                    
+                        // Ejecutar la actualización
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+                        Console.WriteLine(query);
                         if (filasAfectadas > 0)
                         {
                             Console.WriteLine("Empleado actualizado con éxito.");
