@@ -140,7 +140,7 @@ namespace GestorSalas
             panelPeliculas.Controls.Clear();
 
             // desplazamiento vertical
-            int yOffset = 10;
+            int yOffset = 100;
             int xOffset = 10;
 
             // Iterariones
