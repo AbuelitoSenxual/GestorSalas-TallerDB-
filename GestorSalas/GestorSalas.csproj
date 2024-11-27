@@ -170,12 +170,14 @@
     <Content Include="Assets\El Señor de los Anillos.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Inception.jpg" />
     <Content Include="Assets\Los Vengadores.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Mi Villano Favorito.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Toy Story.jpg" />
     <None Include="Resources\Untitled design1.jpg" />
     <None Include="Resources\Untitled design.jpg" />
     <None Include="Resources\images.jpg" />

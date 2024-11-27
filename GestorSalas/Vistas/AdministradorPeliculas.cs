@@ -74,6 +74,8 @@ namespace GestorSalas.Vistas
                 Pelicula pelicula = new Pelicula();
 
                 pelicula.ID_Pelicula = selectedRow.Cells["ID_Pelicula"].Value.ToString();
+
+                Console.WriteLine("este el id de la pelicula"+pelicula.ID_Pelicula);
                 pelicula.nombre = selectedRow.Cells["Nombre"].Value.ToString();
                 pelicula.Duracion = selectedRow.Cells["Duracion"].Value.ToString();
                 pelicula.Genero = selectedRow.Cells["Genero"].Value.ToString();

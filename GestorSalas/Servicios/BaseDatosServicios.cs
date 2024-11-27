@@ -21,10 +21,10 @@ namespace GestorSalas.Servicios
         public baseDatosServicios()
         {
             //4:30
-            cadenaConexion = $"Server=DESKTOP-L5UGVKJ\\SQLEXPRESS; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
+            //cadenaConexion = $"Server=DESKTOP-L5UGVKJ\\SQLEXPRESS; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
             //cadenaConexion = $"Server={server}; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
             //usa esta y cambia la contrasena y usuario
-            //cadenaConexion = $"Server=localhost; Database=GestorSalas; User Id={usuario}; Password={contraseña}; TrustServerCertificate=True;"; 
+            cadenaConexion = $"Server=localhost; Database=GestorSalas; User Id={usuario}; Password={contraseña}; TrustServerCertificate=True;"; 
 
 
 
@@ -344,7 +344,8 @@ namespace GestorSalas.Servicios
                         cmd.Parameters.AddWithValue("@Nombre", pelicula.nombre);
                         cmd.Parameters.AddWithValue("@Duracion", pelicula.Duracion);
                         cmd.Parameters.AddWithValue("@Genero", pelicula.Genero);
-                    
+                        cmd.Parameters.AddWithValue("@ID_Pelicula", pelicula.ID_Pelicula);
+
                         // Ejecutar la actualización
                         int filasAfectadas = cmd.ExecuteNonQuery();
                         Console.WriteLine(query);
