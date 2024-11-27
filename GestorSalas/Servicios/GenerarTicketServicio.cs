@@ -10,6 +10,7 @@ namespace GestorSalas.Servicios
     public class GenerarTicketServicio
     {
        public List<string> asientos = new List<string>();
+       public int cantidadAbonada;
        public FuncionesModelo funciones = new FuncionesModelo();
 
         public string ImprimirTickets()
@@ -27,7 +28,7 @@ namespace GestorSalas.Servicios
             decimal precioPorBoleto = 80.00m; // Precio fijo por boleto
             decimal subtotal = precioPorBoleto * asientos.Count;
             decimal iva = subtotal * 0.16m;
-            decimal total = subtotal + iva;
+            decimal total = subtotal;
 
             // Agregar encabezado del ticket
             ticket.AppendLine("===================================");
@@ -57,7 +58,6 @@ namespace GestorSalas.Servicios
             ticket.AppendLine($"Precio por boleto:  $ {precioPorBoleto:F2}");
             ticket.AppendLine($"Cantidad de boletos: {asientos.Count}");
             ticket.AppendLine($"Subtotal:           $ {subtotal:F2}");
-            ticket.AppendLine($"IVA (16%):          $ {iva:F2}");
             ticket.AppendLine($"Total:              $ {total:F2}");
             ticket.AppendLine("===================================");
 

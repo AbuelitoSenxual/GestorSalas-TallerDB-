@@ -1,4 +1,5 @@
 ﻿using GestorSalas.Servicios;
+using GestorSalas.Vistas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -70,12 +71,17 @@ namespace GestorSalas
                "Confirmar acción", // Título
                MessageBoxButtons.YesNo, // Botones disponibles
                MessageBoxIcon.Question); // Icono del MessageBox
+            
             GenerarTicketServicio.asientos = ObtenerNombresBotonesSeleccionados();
-            
-            
+
+            MontoCambio montoCambio = new MontoCambio(ObtenerNombresBotonesSeleccionados().Count * 80);
+
+
             // Comprobar la respuesta del usuario
             if (resultado == DialogResult.Yes)
             {
+                montoCambio.ShowDialog();
+                GenerarTicketServicio.cantidadAbonada = montoCambio.MontoObtorgado;
                 MessageBox.Show(GenerarTicketServicio.ImprimirTickets(), "Continuar");
                 this.Close();
             }

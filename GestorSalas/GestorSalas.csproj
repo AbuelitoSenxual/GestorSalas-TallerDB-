@@ -80,6 +80,12 @@
     <Compile Include="Vistas\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\MontoCambio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\MontoCambio.Designer.cs">
+      <DependentUpon>MontoCambio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Peliculas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\MontoCambio.resx">
+      <DependentUpon>MontoCambio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Peliculas.resx">
       <DependentUpon>Peliculas.cs</DependentUpon>
