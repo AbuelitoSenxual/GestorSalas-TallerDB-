@@ -17,6 +17,7 @@ namespace GestorSalas
         private List<Button> botonesSeleccionados = new List<Button>();
         private string idfuncion;
         public GenerarTicketServicio GenerarTicketServicio;
+        public static int AcomuladoEnCaja;
         public btnContinuar(string idfuncion, GenerarTicketServicio generarTicketServicio)
         {
 
@@ -67,7 +68,7 @@ namespace GestorSalas
         private void btnBuscarAsiento_Click(object sender, EventArgs e)
         {
             DialogResult resultado = MessageBox.Show(
-               "¿Deseas continuar?", // Mensaje
+               "¿Deseas continuar? Monto de la compra: "+ (ObtenerNombresBotonesSeleccionados().Count * 80)+"$", // Mensaje
                "Confirmar acción", // Título
                MessageBoxButtons.YesNo, // Botones disponibles
                MessageBoxIcon.Question); // Icono del MessageBox
@@ -78,7 +79,9 @@ namespace GestorSalas
             if (resultado == DialogResult.Yes)
             {
                 Cambio cambio = new Cambio(ObtenerNombresBotonesSeleccionados().Count*80);
+
                 cambio.ShowDialog();
+                AcomuladoEnCaja += ObtenerNombresBotonesSeleccionados().Count * 80;
                 MessageBox.Show(GenerarTicketServicio.ImprimirTickets(cambio.tipoPago,cambio.MotoOtorgado), "Continuar");
                 this.Close();
             }

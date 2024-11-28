@@ -231,6 +231,22 @@ namespace GestorSalas
         {
 
         }
+
+        private void CorteBtn_Click(object sender, EventArgs e)
+        {
+            if (!empleado.puesto.Equals("Gerente"))
+            {
+                MessageBox.Show("Solo para administradores");
+            }
+            else
+            {
+
+                MessageBox.Show("EL acumulado en caja es " + btnContinuar.AcomuladoEnCaja);
+
+
+            }
+            
+        }
     }
 }
     
