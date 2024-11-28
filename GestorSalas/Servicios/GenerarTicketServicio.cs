@@ -12,7 +12,8 @@ namespace GestorSalas.Servicios
        public List<string> asientos = new List<string>();
        public FuncionesModelo funciones = new FuncionesModelo();
 
-        public string ImprimirTickets()
+
+        public string ImprimirTickets(string metodoPago, int cantidadAbonada)
         {
             // Verificar si no hay asientos seleccionados
             if (asientos.Count == 0)
@@ -26,14 +27,13 @@ namespace GestorSalas.Servicios
             // Calcular detalles del costo
             decimal precioPorBoleto = 80.00m; // Precio fijo por boleto
             decimal subtotal = precioPorBoleto * asientos.Count;
-            decimal iva = subtotal * 0.16m;
-            decimal total = subtotal + iva;
+            decimal total = subtotal; // Total sin IVA, como se solicita
 
             // Agregar encabezado del ticket
             ticket.AppendLine("===================================");
-            ticket.AppendLine("            CINEPLUS               ");
+            ticket.AppendLine("            CINEMA                 ");
             ticket.AppendLine("         RFC: ABC123456XYZ         ");
-            ticket.AppendLine(" Dirección:Avenida insugentes 58   ");
+            ticket.AppendLine(" Dirección:Avenida Insurgentes 58  ");
             ticket.AppendLine("===================================");
             ticket.AppendLine($"Fecha: {DateTime.Now:dd/MM/yyyy}");
             ticket.AppendLine($"Hora: {DateTime.Now:HH:mm:ss}");
@@ -57,8 +57,12 @@ namespace GestorSalas.Servicios
             ticket.AppendLine($"Precio por boleto:  $ {precioPorBoleto:F2}");
             ticket.AppendLine($"Cantidad de boletos: {asientos.Count}");
             ticket.AppendLine($"Subtotal:           $ {subtotal:F2}");
-            ticket.AppendLine($"IVA (16%):          $ {iva:F2}");
             ticket.AppendLine($"Total:              $ {total:F2}");
+            ticket.AppendLine("===================================");
+
+            // Agregar detalles del pago
+            ticket.AppendLine($"Método de pago:     {metodoPago}");
+            ticket.AppendLine($"Cantidad abonada:   $ {cantidadAbonada:F2}");
             ticket.AppendLine("===================================");
 
             // Mensaje final
@@ -69,6 +73,7 @@ namespace GestorSalas.Servicios
             // Retornar la cadena completa
             return ticket.ToString();
         }
+
 
 
     }

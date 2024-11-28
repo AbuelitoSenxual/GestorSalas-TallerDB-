@@ -1,4 +1,5 @@
 ﻿using GestorSalas.Servicios;
+using GestorSalas.Vistas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -76,7 +77,9 @@ namespace GestorSalas
             // Comprobar la respuesta del usuario
             if (resultado == DialogResult.Yes)
             {
-                MessageBox.Show(GenerarTicketServicio.ImprimirTickets(), "Continuar");
+                Cambio cambio = new Cambio(ObtenerNombresBotonesSeleccionados().Count*80);
+                cambio.ShowDialog();
+                MessageBox.Show(GenerarTicketServicio.ImprimirTickets(cambio.tipoPago,cambio.MotoOtorgado), "Continuar");
                 this.Close();
             }
             else if (resultado == DialogResult.No)
