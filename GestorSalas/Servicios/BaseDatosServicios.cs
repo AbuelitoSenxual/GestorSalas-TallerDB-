@@ -235,7 +235,37 @@ namespace GestorSalas.Servicios
             }
         }
 
+        public List<string> ChecarOcupado(string idFuncion)
+        {
+            conexion = new SqlConnection(cadenaConexion);
+            List<string> asientosOcupados = new List<string>();
+            string query = "SELECT a.Numero FROM EstadoAsientos ea JOIN Asientos a ON ea.ID_Asiento = a.ID_Asiento WHERE ea.ID_Funcion = @idFuncion AND ea.Ocupado = 1;";
+            using (conexion)
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(query, conexion);
+                    cmd.Parameters.AddWithValue("@idFuncion", idFuncion);
+                    conexion.Open();
 
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            asientosOcupados.Add(reader["Numero"].ToString());
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al consultar asientos ocupados: " + ex.Message);
+                }
+            }
+
+            return asientosOcupados;
+
+
+        }
         public void InsertarEmpleado(Empleado empleado)
         {
             conexion = new SqlConnection(cadenaConexion);
@@ -412,6 +442,80 @@ namespace GestorSalas.Servicios
                 }
             }
         }
+        public DataTable AsientosSeleccionados(string idFuncion)
+        {
+            DataTable dt = new DataTable();
+            string query = "SELECT a.Numero FROM EstadoAsientos ea " +
+                           "JOIN Asientos a ON ea.ID_Asiento = a.ID_Asiento " +
+                           "WHERE ea.ID_Funcion = @idFuncion AND ea.Ocupado = 1;";
+
+            using (conexion = new SqlConnection(cadenaConexion))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand(query, conexion);
+                    cmd.Parameters.AddWithValue("@idFuncion", idFuncion);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al consultar asientos: {ex.Message}");
+                }
+            }
+
+            return dt;
+        }
+        public void EjecutarComando(string query)
+        {
+            using (conexion = new SqlConnection(cadenaConexion))
+            {
+                SqlCommand command = new SqlCommand(query, conexion);
+                try
+                {
+                    conexion.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"Error al ejecutar el comando: {ex.Message}");
+                }
+            }
+        }
+
+
+        public static void ActualizarEstadoAsientos(List<string> nombresAsientos, string idFuncion)
+        {
+            // Diccionario para mapear nombres de botones a IDs de asientos
+            Dictionary<string, int> mapaAsientos = new Dictionary<string, int>
+    {
+        { "A1", 1 }, { "A2", 2 }, { "A3", 3 }, { "A4", 4 },
+        { "B1", 5 }, { "B2", 6 }, { "B3", 7 }, { "B4", 8 },
+        { "C1", 9 }, { "C2", 10 }, { "C3", 11 }, { "C4", 12 }
+    };
+
+            baseDatosServicios servicioBD = new baseDatosServicios();
+
+            try
+            {
+                foreach (var nombreAsiento in nombresAsientos)
+                {
+                    if (mapaAsientos.ContainsKey(nombreAsiento))
+                    {
+                        int idAsiento = mapaAsientos[nombreAsiento];
+                        string query = $"UPDATE EstadoAsientos SET Ocupado = 1 WHERE ID_Asiento = {idAsiento} AND ID_Funcion = {idFuncion};";
+
+                        // Ejecutar el query en la base de datos
+                        servicioBD.EjecutarComando(query);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al actualizar asientos: {ex.Message}");
+            }
+        }
+
 
 
 

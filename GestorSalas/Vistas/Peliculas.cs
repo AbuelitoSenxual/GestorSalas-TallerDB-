@@ -241,7 +241,7 @@ namespace GestorSalas
             else
             {
 
-                MessageBox.Show("EL acumulado en caja es " + btnContinuar.AcomuladoEnCaja);
+                MessageBox.Show("EL acumulado en caja es " + AsientosDesign.AcomuladoEnCaja);
 
 
             }

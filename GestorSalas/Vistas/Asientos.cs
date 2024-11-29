@@ -12,27 +12,56 @@ using System.Windows.Forms;
 
 namespace GestorSalas
 {
-    public partial class btnContinuar : Form
+    public partial class AsientosDesign : Form
     {
         private List<Button> botonesSeleccionados = new List<Button>();
         private string idfuncion;
         public GenerarTicketServicio GenerarTicketServicio;
         public static int AcomuladoEnCaja;
-        public btnContinuar(string idfuncion, GenerarTicketServicio generarTicketServicio)
+        public AsientosDesign(string idfuncion, GenerarTicketServicio generarTicketServicio)
         {
-
             this.idfuncion = idfuncion;
             GenerarTicketServicio = generarTicketServicio;
             InitializeComponent();
 
+            var asientosOcupados = ConsultarAsientosOcupados(idfuncion);
+            MarcarAsientosOcupados(asientosOcupados);
+
+            // Asignar eventos a los botones que representan los asientos
             foreach (Control control in this.Controls)
             {
-                if (control is Button)
+                if (control is Button btn && btn.Text != null) // Los botones deben tener un Tag asignado
                 {
-                    control.Click += Boton_Click;
+                    btn.Click += Boton_Click;
+                    btn.BackColor = Color.LightGray; // Asegurarse de que el color inicial sea consistente
                 }
             }
         }
+
+        private List<string> ConsultarAsientosOcupados(string idFuncion)
+        {
+            baseDatosServicios servicioBD = new baseDatosServicios();
+            List<string> asientosOcupados = new List<string>();
+
+            try
+            {
+                DataTable dt = servicioBD.AsientosSeleccionados(idFuncion);
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    asientosOcupados.Add(row["Numero"].ToString()); // Usar la columna correcta
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar asientos ocupados: {ex.Message}");
+            }
+
+            return asientosOcupados;
+        }
+
+
+
         public List<string> ObtenerNombresBotonesSeleccionados()
         {
             // Devolver los nombres de los botones seleccionados
@@ -49,7 +78,7 @@ namespace GestorSalas
                 {
                     // Desmarcar el botón (quitar selección)
                     botonesSeleccionados.Remove(btn);
-                    btn.BackColor = Color.LightGray;  // Color original
+                    btn.BackColor = Color.LightGray;  // Color original (no seleccionado)
                 }
                 else
                 {
@@ -60,29 +89,58 @@ namespace GestorSalas
             }
         }
 
+
         private void Asientos_Load(object sender, EventArgs e)
         {
+            var asientosOcupados = ConsultarAsientosOcupados(idfuncion);
+            MarcarAsientosOcupados(asientosOcupados);
 
         }
+        public void MarcarAsientosOcupados(List<string> nombresAsientosOcupados)
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is Button btn && nombresAsientosOcupados.Contains(btn.Name))
+                {
+                    btn.BackColor = Color.Red;  // Color que indica que el asiento está ocupado
+                    btn.Enabled = false;        // Deshabilitar el botón para evitar selección
+                }
+            }
+        }
+
+
+
+
 
         private void btnBuscarAsiento_Click(object sender, EventArgs e)
         {
+            baseDatosServicios baseDatosServicios = new baseDatosServicios();
+
             DialogResult resultado = MessageBox.Show(
-               "¿Deseas continuar? Monto de la compra: "+ (ObtenerNombresBotonesSeleccionados().Count * 80)+"$", // Mensaje
-               "Confirmar acción", // Título
-               MessageBoxButtons.YesNo, // Botones disponibles
-               MessageBoxIcon.Question); // Icono del MessageBox
+                "¿Deseas continuar? Monto de la compra: " + (ObtenerNombresBotonesSeleccionados().Count * 80) + "$",
+                "Confirmar acción",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
             GenerarTicketServicio.asientos = ObtenerNombresBotonesSeleccionados();
-            
-            
-            // Comprobar la respuesta del usuario
+
             if (resultado == DialogResult.Yes)
             {
-                Cambio cambio = new Cambio(ObtenerNombresBotonesSeleccionados().Count*80);
+                // Actualizar el estado de los asientos seleccionados
+                baseDatosServicios.ActualizarEstadoAsientos(ObtenerNombresBotonesSeleccionados(), idfuncion);
 
+
+                baseDatosServicios.ActualizarEstadoAsientos(ObtenerNombresBotonesSeleccionados(), idfuncion);  
+
+                // Llamar al método para marcar los asientos como ocupados
+                List<string> asientosOcupados = ConsultarAsientosOcupados(idfuncion);
+                MarcarAsientosOcupados(asientosOcupados);
+
+                // Continuar con el flujo de la aplicación
+                Cambio cambio = new Cambio(ObtenerNombresBotonesSeleccionados().Count * 80);
                 cambio.ShowDialog();
                 AcomuladoEnCaja += ObtenerNombresBotonesSeleccionados().Count * 80;
-                MessageBox.Show(GenerarTicketServicio.ImprimirTickets(cambio.tipoPago,cambio.MotoOtorgado), "Continuar");
+                MessageBox.Show(GenerarTicketServicio.ImprimirTickets(cambio.tipoPago, cambio.MotoOtorgado), "Continuar");
                 this.Close();
             }
             else if (resultado == DialogResult.No)
@@ -91,5 +149,7 @@ namespace GestorSalas
                 this.Close();
             }
         }
+
+
     }
 }

@@ -61,7 +61,7 @@ namespace GestorSalas
 
 
                 // Crea una instancia del siguiente formulario y pasa el ID
-                btnContinuar funciones = new btnContinuar(ID_Funcion, GenerarTicketServicio);
+                AsientosDesign funciones = new AsientosDesign(ID_Funcion, GenerarTicketServicio);
 
 
                 this.Hide();

@@ -1,6 +1,6 @@
 ﻿namespace GestorSalas
 {
-    partial class btnContinuar
+    partial class AsientosDesign
     {
         /// <summary>
         /// Required designer variable.
@@ -52,110 +52,125 @@
             // 
             // A1
             // 
+            this.A1.BackColor = System.Drawing.Color.Black;
             this.A1.Location = new System.Drawing.Point(160, 95);
-            this.A1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.A1.Margin = new System.Windows.Forms.Padding(4);
             this.A1.Name = "A1";
             this.A1.Size = new System.Drawing.Size(59, 47);
             this.A1.TabIndex = 0;
-            this.A1.UseVisualStyleBackColor = true;
+            this.A1.Tag = "";
+            this.A1.UseVisualStyleBackColor = false;
             // 
             // B3
             // 
             this.B3.Location = new System.Drawing.Point(332, 167);
-            this.B3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.B3.Margin = new System.Windows.Forms.Padding(4);
             this.B3.Name = "B3";
             this.B3.Size = new System.Drawing.Size(59, 47);
             this.B3.TabIndex = 1;
+            this.B3.Tag = "7";
             this.B3.UseVisualStyleBackColor = true;
             // 
             // B2
             // 
+            this.B2.BackColor = System.Drawing.SystemColors.Highlight;
             this.B2.Location = new System.Drawing.Point(245, 167);
-            this.B2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.B2.Margin = new System.Windows.Forms.Padding(4);
             this.B2.Name = "B2";
             this.B2.Size = new System.Drawing.Size(59, 47);
             this.B2.TabIndex = 2;
-            this.B2.UseVisualStyleBackColor = true;
+            this.B2.Tag = "6";
+            this.B2.UseVisualStyleBackColor = false;
             // 
             // B1
             // 
+            this.B1.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.B1.Location = new System.Drawing.Point(160, 167);
-            this.B1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.B1.Margin = new System.Windows.Forms.Padding(4);
             this.B1.Name = "B1";
             this.B1.Size = new System.Drawing.Size(59, 47);
             this.B1.TabIndex = 3;
-            this.B1.UseVisualStyleBackColor = true;
+            this.B1.Tag = "";
+            this.B1.UseVisualStyleBackColor = false;
             // 
             // A4
             // 
             this.A4.Location = new System.Drawing.Point(416, 95);
-            this.A4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.A4.Margin = new System.Windows.Forms.Padding(4);
             this.A4.Name = "A4";
             this.A4.Size = new System.Drawing.Size(59, 47);
             this.A4.TabIndex = 4;
+            this.A4.Tag = "4";
             this.A4.UseVisualStyleBackColor = true;
             // 
             // A3
             // 
             this.A3.Location = new System.Drawing.Point(332, 95);
-            this.A3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.A3.Margin = new System.Windows.Forms.Padding(4);
             this.A3.Name = "A3";
             this.A3.Size = new System.Drawing.Size(59, 47);
             this.A3.TabIndex = 5;
+            this.A3.Tag = "3";
             this.A3.UseVisualStyleBackColor = true;
             // 
             // A2
             // 
             this.A2.Location = new System.Drawing.Point(245, 95);
-            this.A2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.A2.Margin = new System.Windows.Forms.Padding(4);
             this.A2.Name = "A2";
             this.A2.Size = new System.Drawing.Size(59, 47);
             this.A2.TabIndex = 6;
+            this.A2.Tag = "";
             this.A2.UseVisualStyleBackColor = true;
             // 
             // B4
             // 
             this.B4.Location = new System.Drawing.Point(416, 167);
-            this.B4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.B4.Margin = new System.Windows.Forms.Padding(4);
             this.B4.Name = "B4";
             this.B4.Size = new System.Drawing.Size(59, 47);
             this.B4.TabIndex = 7;
+            this.B4.Tag = "8";
             this.B4.UseVisualStyleBackColor = true;
             // 
             // C1
             // 
             this.C1.Location = new System.Drawing.Point(160, 240);
-            this.C1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.C1.Margin = new System.Windows.Forms.Padding(4);
             this.C1.Name = "C1";
             this.C1.Size = new System.Drawing.Size(59, 47);
             this.C1.TabIndex = 8;
+            this.C1.Tag = "9";
             this.C1.UseVisualStyleBackColor = true;
             // 
             // C2
             // 
             this.C2.Location = new System.Drawing.Point(245, 240);
-            this.C2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.C2.Margin = new System.Windows.Forms.Padding(4);
             this.C2.Name = "C2";
             this.C2.Size = new System.Drawing.Size(59, 47);
             this.C2.TabIndex = 9;
+            this.C2.Tag = "10";
             this.C2.UseVisualStyleBackColor = true;
             // 
             // C3
             // 
             this.C3.Location = new System.Drawing.Point(332, 240);
-            this.C3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.C3.Margin = new System.Windows.Forms.Padding(4);
             this.C3.Name = "C3";
             this.C3.Size = new System.Drawing.Size(59, 47);
             this.C3.TabIndex = 10;
+            this.C3.Tag = "11";
             this.C3.UseVisualStyleBackColor = true;
             // 
             // C4
             // 
             this.C4.Location = new System.Drawing.Point(416, 240);
-            this.C4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.C4.Margin = new System.Windows.Forms.Padding(4);
             this.C4.Name = "C4";
             this.C4.Size = new System.Drawing.Size(59, 47);
             this.C4.TabIndex = 11;
+            this.C4.Tag = "12";
             this.C4.UseVisualStyleBackColor = true;
             // 
             // lblA
@@ -245,7 +260,7 @@
             this.panel1.Size = new System.Drawing.Size(289, 10);
             this.panel1.TabIndex = 19;
             // 
-            // btnContinuar
+            // AsientosDesign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -270,8 +285,8 @@
             this.Controls.Add(this.B2);
             this.Controls.Add(this.B3);
             this.Controls.Add(this.A1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "btnContinuar";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "AsientosDesign";
             this.Text = "Asientos";
             this.Load += new System.EventHandler(this.Asientos_Load);
             this.ResumeLayout(false);
