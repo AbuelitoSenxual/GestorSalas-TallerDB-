@@ -8,7 +8,12 @@ namespace GestorSalas.Modelos
 {
     public class FuncionesModelo
     {
-        public string Hora;
-        public string pelicula;
+        public int ID_Funcion;
+        public string ID_Pelicula;
+        public int ID_Sala;
+        public DateTime HoraInicio;
+        public DateTime HoraFin;
+        public int costo;
+
     }
 }

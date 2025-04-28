@@ -15,14 +15,15 @@ namespace GestorSalas.Servicios
     {
         private string usuario = "sa";
         private string contraseña = "1234";
-        private string server = "DESKTOP-L5UGVKJ\\SQLEXPRESS";
+        private string server = "MARCOLAPTOP";
+        private string BasedeDatos = "GestorSalas";
         private string cadenaConexion;
         private SqlConnection conexion;
         public baseDatosServicios()
         {
             //4:30
             //cadenaConexion = $"Server=DESKTOP-L5UGVKJ\\SQLEXPRESS; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
-            cadenaConexion = $"Server=DESKTOP-IPBG7ER\\SQLEXPRESS; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
+            cadenaConexion = $"Server={server}; Database={BasedeDatos}; User Id={usuario}; Password={contraseña};";
             //cadenaConexion = $"Server={server}; Database=GestorSalas; User Id={usuario}; Password={contraseña};";
             //usa esta y cambia la contrasena y usuario
             //cadenaConexion = $"Server=localhost; Database=GestorSalas; User Id={usuario}; Password={contraseña}; TrustServerCertificate=True;"; 
@@ -82,8 +83,10 @@ namespace GestorSalas.Servicios
             {
                 conexion.Open();
                 string querry = $"select ID_Empleado,Nombre,Puesto,Usuario,Contraseña from Empleados where Usuario='{usuario}' AND Contraseña = '{contraseña}'";
-                using (SqlCommand comando = new SqlCommand(querry, conexion)) {
-                    using (SqlDataReader lector = comando.ExecuteReader()) {
+                using (SqlCommand comando = new SqlCommand(querry, conexion))
+                {
+                    using (SqlDataReader lector = comando.ExecuteReader())
+                    {
                         if (lector.Read())
                         {
                             empleado.id_Empleado = lector.GetInt32(0);
@@ -101,7 +104,8 @@ namespace GestorSalas.Servicios
 
         }
 
-        public DataTable peliculasInformacion() {
+        public DataTable peliculasInformacion()
+        {
 
             DataTable dt = new DataTable();
             conexion = new SqlConnection(cadenaConexion);
@@ -125,10 +129,10 @@ namespace GestorSalas.Servicios
 
 
 
-            
+
             return dt;
         }
-        public DataTable HorarioPeliocula(string id )
+        public DataTable HorarioPeliocula(string id)
         {
 
             DataTable dt = new DataTable();
@@ -145,7 +149,7 @@ namespace GestorSalas.Servicios
                     // Llenar el DataTable con los datos de la base de datos
                     da.Fill(dt);
 
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -337,7 +341,7 @@ namespace GestorSalas.Servicios
                     "[Genero] = @Genero " +
                     "WHERE [ID_Pelicula] = @ID_Pelicula";
 
-                  
+
 
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
@@ -415,10 +419,12 @@ namespace GestorSalas.Servicios
 
 
 
-        public bool agregarPelicula(string nombre,string genero,int duracion) {
+        public bool agregarPelicula(string nombre, string genero, int duracion)
+        {
             string querry = $"INSERT INTO Peliculas (Nombre, Duracion, Genero) VALUES ('{nombre}', {duracion}, '{genero}');";
             conexion = new SqlConnection(cadenaConexion);
-            using (conexion) {
+            using (conexion)
+            {
 
                 try
                 {
@@ -439,7 +445,139 @@ namespace GestorSalas.Servicios
                 }
 
             }
-        
+
         }
+
+        public Venta GenerarVenta(Empleado empleado)
+        {
+            Venta venta = new Venta();
+            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            {
+                conexion.Open();
+                string query = "INSERT INTO Venta (ID_Empleado, FechaCompra) VALUES (@ID_Empleado, @FechaCompra); SELECT SCOPE_IDENTITY();";
+
+                using (SqlCommand comando = new SqlCommand(query, conexion))
+                {
+                    comando.Parameters.AddWithValue("@ID_Empleado", empleado.id_Empleado);
+                    comando.Parameters.AddWithValue("@FechaCompra", DateTime.Now);
+
+                    object resultado = comando.ExecuteScalar();
+                    if (resultado != null && int.TryParse(resultado.ToString(), out int idVenta))
+                    {
+                        venta.ID_Venta = idVenta;
+                    }
+                    else
+                    {
+                        throw new Exception("No se pudo generar el ID de la venta.");
+                    }
+
+                    venta.ID_Empleado = empleado.id_Empleado;
+                    venta.FechaCompra = DateTime.Now;
+                }
+            }
+
+            return venta;
+        }
+
+
+
+
+        public List<string> AsientosBloqueados(int IDfuncion)
+        {
+            List<string> asientos = new List<string>();
+            conexion = new SqlConnection(cadenaConexion);
+            using (conexion)
+            {
+                conexion.Open();
+                string query = $@"
+            SELECT a.nombre
+            FROM Asientos a
+            INNER JOIN Reservaciones r ON a.id_asiento = r.id_asiento
+            WHERE r.id_funcion = {IDfuncion};";
+
+                using (SqlCommand comando = new SqlCommand(query, conexion))
+                {
+                    using (SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            asientos.Add(reader.GetString(0)); // Agrega el nombre del asiento
+                        }
+                    }
+                }
+            }
+            return asientos;
+        }
+
+        public List<int> ObtenerIdsAsientos(List<string> nombresAsientos, int idFuncion)
+        {
+            List<int> idsAsientos = new List<int>();
+            conexion = new SqlConnection(cadenaConexion);
+
+            using (conexion)
+            {
+                conexion.Open();
+
+                // Armamos parámetros para los nombres de los asientos
+                var parametros = string.Join(", ", nombresAsientos.Select((_, index) => $"@asiento{index}"));
+
+                string query = $@"
+            SELECT A.ID_Asiento
+            FROM Asientos A
+            INNER JOIN Reservaciones R ON A.ID_Asiento = R.ID_Asiento
+            WHERE R.ID_Funcion = @idFuncion
+              AND A.Numero IN ({parametros})";
+
+                using (SqlCommand comando = new SqlCommand(query, conexion))
+                {
+                    comando.Parameters.AddWithValue("@idFuncion", idFuncion);
+
+                    for (int i = 0; i < nombresAsientos.Count; i++)
+                    {
+                        comando.Parameters.AddWithValue($"@asiento{i}", nombresAsientos[i]);
+                    }
+
+                    using (SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            idsAsientos.Add(reader.GetInt32(0)); // Agrega el ID del asiento
+                        }
+                    }
+                }
+            }
+
+            return idsAsientos;
+        }
+        public void InsertarReservaciones(List<Reservacion> listaReservaciones)
+        {
+            conexion = new SqlConnection(cadenaConexion);
+
+            using (conexion)
+            {
+                conexion.Open();
+
+                foreach (var reservacion in listaReservaciones)
+                {
+                    string query = @"
+                INSERT INTO Reservaciones (ID_Asiento, ID_Funcion, ID_Empleado, ID_Venta, Fecha_Reservacion)
+                VALUES (@idAsiento, @idFuncion, @idEmpleado, @idVenta, @fechaReservacion);";
+
+                    using (SqlCommand comando = new SqlCommand(query, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@idAsiento", reservacion.ID_Asiento);
+                        comando.Parameters.AddWithValue("@idFuncion", reservacion.ID_Funcion);
+                        comando.Parameters.AddWithValue("@idEmpleado", reservacion.ID_Empleado);
+                        comando.Parameters.AddWithValue("@idVenta", reservacion.ID_Venta);
+                        comando.Parameters.AddWithValue("@fechaReservacion", reservacion.Fecha_Reservacion);
+
+                        comando.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+
+
     }
 }

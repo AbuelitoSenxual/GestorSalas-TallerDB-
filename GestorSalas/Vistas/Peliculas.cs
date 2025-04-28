@@ -209,15 +209,14 @@ namespace GestorSalas
 
              
                 FuncionesModelo funcionesModelo = new FuncionesModelo();
-                GenerarTicketServicio ticketServicio = new GenerarTicketServicio();
 
-                
-                funcionesModelo.pelicula = nombrePelicula;
 
-                ticketServicio.funciones = funcionesModelo;
 
-      
-                Funciones funciones = new Funciones(idPelicula, ticketServicio);
+
+
+
+                Venta venta = baseDatosServicios.GenerarVenta(empleado);
+                Funciones funciones = new Funciones(idPelicula,empleado,venta);
 
               
                 this.Hide();

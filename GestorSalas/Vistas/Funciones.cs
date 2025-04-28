@@ -1,4 +1,5 @@
-﻿using GestorSalas.Servicios;
+﻿using GestorSalas.Modelos;
+using GestorSalas.Servicios;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -8,13 +9,17 @@ namespace GestorSalas
     public partial class Funciones : Form
     {
         public string idPelicula;
-        public GenerarTicketServicio GenerarTicketServicio;
+        public Empleado Empleado;
+        public Venta Venta;
+        public FuncionesModelo FuncionesModelo;
+        
 
-        public Funciones(string idPelicula, GenerarTicketServicio generarTicketServicio)
+        public Funciones(string idPelicula, Empleado Empleado, Venta Venta)
         {
             InitializeComponent();
             this.idPelicula = idPelicula;
-            GenerarTicketServicio = generarTicketServicio;
+            this.Empleado = Empleado;
+            this.Venta = Venta;
         }
 
         private void Form3_Activated(object sender, EventArgs e)
@@ -51,22 +56,23 @@ namespace GestorSalas
                 // Obtiene la fila seleccionada
                 DataGridViewRow filaSeleccionada = dgvpelicula.CurrentRow;
 
-                // Suponiendo que la columna de ID se llama "ID_Pelicula"
-                string ID_Funcion = filaSeleccionada.Cells["ID_Funcion"].Value.ToString();
-                Console.WriteLine($"ID de la funcion seleccionada: {ID_Funcion}");
+                //Rellenamos el objeto FuncionesModelo
+                FuncionesModelo.ID_Funcion = Convert.ToInt32(filaSeleccionada.Cells["ID_Funcion"].Value);
+                FuncionesModelo.ID_Pelicula = filaSeleccionada.Cells["ID_Pelicula"].Value.ToString();
+                FuncionesModelo.ID_Sala = Convert.ToInt32(filaSeleccionada.Cells["ID_Sala"].Value);
+                FuncionesModelo.HoraInicio = Convert.ToDateTime(filaSeleccionada.Cells["HoraInicio"].Value);
+                FuncionesModelo.HoraFin = Convert.ToDateTime(filaSeleccionada.Cells["HoraFin"].Value);
+                FuncionesModelo.costo = Convert.ToInt32(filaSeleccionada.Cells["Costo"].Value);
 
-                GenerarTicketServicio.funciones.Hora = filaSeleccionada.Cells["Hora"].Value.ToString();
 
 
-
-
-                // Crea una instancia del siguiente formulario y pasa el ID
-                btnContinuar funciones = new btnContinuar(ID_Funcion, GenerarTicketServicio);
+                // Crea una instancia del siguiente formulario y pasa los objetos
+                frmAsientos frmAsientos = new frmAsientos(Empleado, FuncionesModelo, Venta);
 
 
                 this.Hide();
-                funciones.Owner = this;
-                funciones.ShowDialog();
+                frmAsientos.Owner = this;
+                frmAsientos.ShowDialog();
                 this.Show();
             }
             else

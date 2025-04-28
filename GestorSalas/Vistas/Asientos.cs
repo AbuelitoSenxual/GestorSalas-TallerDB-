@@ -1,4 +1,5 @@
-﻿using GestorSalas.Servicios;
+﻿using GestorSalas.Modelos;
+using GestorSalas.Servicios;
 using GestorSalas.Vistas;
 using System;
 using System.Collections.Generic;
@@ -12,16 +13,22 @@ using System.Windows.Forms;
 
 namespace GestorSalas
 {
-    public partial class btnContinuar : Form
+    public partial class frmAsientos : Form
     {
         private List<Button> botonesSeleccionados = new List<Button>();
-        private string idfuncion;
-        public GenerarTicketServicio GenerarTicketServicio;
-        public btnContinuar(string idfuncion, GenerarTicketServicio generarTicketServicio)
-        {
 
-            this.idfuncion = idfuncion;
-            GenerarTicketServicio = generarTicketServicio;
+        public FuncionesModelo funciones;
+        public Venta Venta;
+        public Empleado empleado;
+        List<Reservacion> listaReservaciones = new List<Reservacion>();
+        baseDatosServicios bd = new baseDatosServicios();
+        private List<Button> botonesBloqueados = new List<Button>();
+
+        public frmAsientos(Empleado empleado,FuncionesModelo funciones, Venta Venta)
+        {
+            this.empleado = empleado;
+            this.Venta = Venta;
+            this.funciones = funciones;
             InitializeComponent();
 
             foreach (Control control in this.Controls)
@@ -34,35 +41,54 @@ namespace GestorSalas
         }
         public List<string> ObtenerNombresBotonesSeleccionados()
         {
-            // Devolver los nombres de los botones seleccionados
-            return botonesSeleccionados.Select(btn => btn.Name).ToList();
+            return botonesSeleccionados
+                   .Where(btn => !botonesBloqueados.Contains(btn))
+                   .Select(btn => btn.Name)
+                   .ToList();
         }
+
 
         private void Boton_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
             if (btn != null)
             {
-                // Verificar si el botón ya está seleccionado
+                // Si el botón está bloqueado, ignorarlo
+                if (botonesBloqueados.Contains(btn))
+                    return;
+
                 if (botonesSeleccionados.Contains(btn))
                 {
-                    // Desmarcar el botón (quitar selección)
                     botonesSeleccionados.Remove(btn);
-                    btn.BackColor = Color.LightGray;  // Color original
+                    btn.BackColor = Color.LightGray;
                 }
                 else
                 {
-                    // Marcar el botón (seleccionado)
                     botonesSeleccionados.Add(btn);
-                    btn.BackColor = Color.Green;  // Color cuando está seleccionado
+                    btn.BackColor = Color.Green;
                 }
             }
         }
 
+
         private void Asientos_Load(object sender, EventArgs e)
         {
+            List<string> botonesParaBloquear = bd.AsientosBloqueados(funciones.ID_Funcion);
 
+            foreach (Control control in this.Controls)
+            {
+                if (control is Button btn)
+                {
+                    if (botonesParaBloquear.Contains(btn.Name))
+                    {
+                        btn.BackColor = Color.Red;
+                        btn.Enabled = false;  // Opcional: deshabilitarlo físicamente
+                        botonesBloqueados.Add(btn);
+                    }
+                }
+            }
         }
+
 
         private void btnBuscarAsiento_Click(object sender, EventArgs e)
         {
@@ -71,15 +97,26 @@ namespace GestorSalas
                "Confirmar acción", // Título
                MessageBoxButtons.YesNo, // Botones disponibles
                MessageBoxIcon.Question); // Icono del MessageBox
-            GenerarTicketServicio.asientos = ObtenerNombresBotonesSeleccionados();
             
             
             // Comprobar la respuesta del usuario
             if (resultado == DialogResult.Yes)
             {
-                Cambio cambio = new Cambio(ObtenerNombresBotonesSeleccionados().Count*80);
-                cambio.ShowDialog();
-                MessageBox.Show(GenerarTicketServicio.ImprimirTickets(cambio.tipoPago,cambio.MotoOtorgado), "Continuar");
+                List<int> idsAsientos = bd.ObtenerIdsAsientos(ObtenerNombresBotonesSeleccionados(), funciones.ID_Funcion);
+                foreach (int id in idsAsientos)
+                {
+                    Reservacion reservacion = new Reservacion
+                    {
+                        ID_Asiento = id,
+                        ID_Funcion = funciones.ID_Funcion,
+                        ID_Empleado = empleado.id_Empleado,
+                        ID_Venta = Venta.ID_Venta,
+                        Fecha_Reservacion = DateTime.Now
+                    };
+                    listaReservaciones.Add(reservacion);
+                }
+
+                bd.InsertarReservaciones(listaReservaciones);
                 this.Close();
             }
             else if (resultado == DialogResult.No)
@@ -87,6 +124,11 @@ namespace GestorSalas
                 MessageBox.Show("¡Has declinado la acción!", "Declinar");
                 this.Close();
             }
+        }
+
+        private void C4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
