@@ -103,6 +103,7 @@ namespace GestorSalas
             if (resultado == DialogResult.Yes)
             {
                 List<int> idsAsientos = bd.ObtenerIdsAsientos(ObtenerNombresBotonesSeleccionados(), funciones.ID_Funcion);
+
                 foreach (int id in idsAsientos)
                 {
                     Reservacion reservacion = new Reservacion

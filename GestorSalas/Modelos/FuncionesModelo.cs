@@ -11,8 +11,8 @@ namespace GestorSalas.Modelos
         public int ID_Funcion;
         public string ID_Pelicula;
         public int ID_Sala;
-        public DateTime HoraInicio;
-        public DateTime HoraFin;
+        public TimeSpan HoraInicio;
+        public TimeSpan HoraFin;
         public int costo;
 
     }

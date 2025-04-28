@@ -15,7 +15,7 @@ namespace GestorSalas.Servicios
     {
         private string usuario = "sa";
         private string contraseña = "1234";
-        private string server = "MARCOLAPTOP";
+        private string server = "DESKTOP-IPBG7ER\\SQLEXPRESS";
         private string BasedeDatos = "GestorSalas";
         private string cadenaConexion;
         private SqlConnection conexion;
@@ -132,37 +132,44 @@ namespace GestorSalas.Servicios
 
             return dt;
         }
-        public DataTable HorarioPeliocula(string id)
+        public DataTable ObtenerTodaInformacionFunciones(string ID_Pelicula)
         {
-
             DataTable dt = new DataTable();
-            conexion = new SqlConnection(cadenaConexion);
+            string query = @"SELECT 
+                        f.ID_Funcion, 
+                        p.ID_Pelicula,
+                        p.Nombre AS NombrePelicula, 
+                        f.ID_Sala,
+                        f.HoraInicio, 
+                        f.HoraFin, 
+                        p.Duracion, 
+                        f.Costo
+                     FROM Funciones f
+                     INNER JOIN Peliculas p ON f.ID_Pelicula = p.ID_Pelicula
+                     WHERE p.ID_Pelicula = @ID_Pelicula";
 
-            string querry = $"select ID_Funcion,Nombre,Fecha,Hora from funciones,Peliculas where Peliculas.ID_Pelicula={id} and  funciones.ID_Pelicula ={id};";
-            using (conexion)
+            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
             {
                 try
                 {
-                    // Crear un adaptador SQL
-                    SqlDataAdapter da = new SqlDataAdapter(querry, conexion);
+                    SqlCommand cmd = new SqlCommand(query, conexion);
+                    cmd.Parameters.AddWithValue("@ID_Pelicula", ID_Pelicula);
 
-                    // Llenar el DataTable con los datos de la base de datos
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                    conexion.Open();
                     da.Fill(dt);
-
-
                 }
                 catch (Exception ex)
                 {
-                    // En caso de error, mostrar el mensaje de error
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
-
-
-
-
             return dt;
         }
+
+
+
         public DataTable empleadoInformacion()
         {
 
@@ -490,7 +497,7 @@ namespace GestorSalas.Servicios
             {
                 conexion.Open();
                 string query = $@"
-            SELECT a.nombre
+            SELECT a.Numero
             FROM Asientos a
             INNER JOIN Reservaciones r ON a.id_asiento = r.id_asiento
             WHERE r.id_funcion = {IDfuncion};";
@@ -509,46 +516,44 @@ namespace GestorSalas.Servicios
             return asientos;
         }
 
-        public List<int> ObtenerIdsAsientos(List<string> nombresAsientos, int idFuncion)
+        public List<int> ObtenerIdsAsientos(List<string> NumeroAsientos, int idFuncion)
         {
             List<int> idsAsientos = new List<int>();
-            conexion = new SqlConnection(cadenaConexion);
 
-            using (conexion)
+            using (var conexion = new SqlConnection(cadenaConexion))
             {
                 conexion.Open();
 
-                // Armamos parámetros para los nombres de los asientos
-                var parametros = string.Join(", ", nombresAsientos.Select((_, index) => $"@asiento{index}"));
-
+                var parametros = string.Join(", ", NumeroAsientos.Select((_, index) => $"@asiento{index}"));
                 string query = $@"
-            SELECT A.ID_Asiento
-            FROM Asientos A
-            INNER JOIN Reservaciones R ON A.ID_Asiento = R.ID_Asiento
-            WHERE R.ID_Funcion = @idFuncion
-              AND A.Numero IN ({parametros})";
+            SELECT a.ID_Asiento
+            FROM Asientos a
+            INNER JOIN Funciones f ON a.ID_Sala = f.ID_Sala
+            WHERE f.ID_Funcion = @idFuncion
+            AND a.Numero IN ({parametros});";
 
-                using (SqlCommand comando = new SqlCommand(query, conexion))
+                using (var comando = new SqlCommand(query, conexion))
                 {
                     comando.Parameters.AddWithValue("@idFuncion", idFuncion);
 
-                    for (int i = 0; i < nombresAsientos.Count; i++)
+                    for (int i = 0; i < NumeroAsientos.Count; i++)
                     {
-                        comando.Parameters.AddWithValue($"@asiento{i}", nombresAsientos[i]);
+                        comando.Parameters.AddWithValue($"@asiento{i}", NumeroAsientos[i]);
                     }
 
-                    using (SqlDataReader reader = comando.ExecuteReader())
+                    using (var reader = comando.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            idsAsientos.Add(reader.GetInt32(0)); // Agrega el ID del asiento
+                            idsAsientos.Add(reader.GetInt32(0)); // ID_Asiento
                         }
                     }
                 }
             }
-
             return idsAsientos;
         }
+
+
         public void InsertarReservaciones(List<Reservacion> listaReservaciones)
         {
             conexion = new SqlConnection(cadenaConexion);

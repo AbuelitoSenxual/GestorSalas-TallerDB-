@@ -11,7 +11,7 @@ namespace GestorSalas
         public string idPelicula;
         public Empleado Empleado;
         public Venta Venta;
-        public FuncionesModelo FuncionesModelo;
+        public FuncionesModelo FuncionesModelo = new FuncionesModelo();
         
 
         public Funciones(string idPelicula, Empleado Empleado, Venta Venta)
@@ -27,15 +27,20 @@ namespace GestorSalas
 
             baseDatosServicios baseDatosServicios = new baseDatosServicios();
 
-            DataTable dt = baseDatosServicios.HorarioPeliocula(idPelicula);
+            DataTable dt = baseDatosServicios.ObtenerTodaInformacionFunciones(idPelicula);
             dgvpelicula.DataSource = dt;
 
 
 
             dgvpelicula.Columns["ID_Funcion"].Visible = false;
+            dgvpelicula.Columns["ID_Sala"].Visible = false;
+            dgvpelicula.Columns["HoraFin"].Visible = false;
+            dgvpelicula.Columns["ID_Pelicula"].Visible = false;
+
+
         }
 
-      
+
 
         private void btnAtras_Click(object sender, EventArgs e)
         {
@@ -60,8 +65,9 @@ namespace GestorSalas
                 FuncionesModelo.ID_Funcion = Convert.ToInt32(filaSeleccionada.Cells["ID_Funcion"].Value);
                 FuncionesModelo.ID_Pelicula = filaSeleccionada.Cells["ID_Pelicula"].Value.ToString();
                 FuncionesModelo.ID_Sala = Convert.ToInt32(filaSeleccionada.Cells["ID_Sala"].Value);
-                FuncionesModelo.HoraInicio = Convert.ToDateTime(filaSeleccionada.Cells["HoraInicio"].Value);
-                FuncionesModelo.HoraFin = Convert.ToDateTime(filaSeleccionada.Cells["HoraFin"].Value);
+                FuncionesModelo.HoraInicio = (TimeSpan)filaSeleccionada.Cells["HoraInicio"].Value;
+                FuncionesModelo.HoraFin = (TimeSpan)filaSeleccionada.Cells["HoraFin"].Value;
+
                 FuncionesModelo.costo = Convert.ToInt32(filaSeleccionada.Cells["Costo"].Value);
 
 

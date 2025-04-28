@@ -37,7 +37,7 @@
             // btnBuscarAsiento
             // 
             this.btnBuscarAsiento.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscarAsiento.Location = new System.Drawing.Point(549, 81);
+            this.btnBuscarAsiento.Location = new System.Drawing.Point(580, 79);
             this.btnBuscarAsiento.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnBuscarAsiento.Name = "btnBuscarAsiento";
             this.btnBuscarAsiento.Size = new System.Drawing.Size(182, 100);
@@ -49,7 +49,7 @@
             // btnAtras
             // 
             this.btnAtras.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAtras.Location = new System.Drawing.Point(549, 264);
+            this.btnAtras.Location = new System.Drawing.Point(580, 262);
             this.btnAtras.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(182, 100);
@@ -60,10 +60,12 @@
             // 
             // dgvpelicula
             // 
+            this.dgvpelicula.AllowUserToAddRows = false;
+            this.dgvpelicula.AllowUserToDeleteRows = false;
             this.dgvpelicula.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvpelicula.Location = new System.Drawing.Point(23, 35);
             this.dgvpelicula.Name = "dgvpelicula";
-            this.dgvpelicula.Size = new System.Drawing.Size(494, 385);
+            this.dgvpelicula.Size = new System.Drawing.Size(527, 385);
             this.dgvpelicula.TabIndex = 4;
             this.dgvpelicula.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvpelicula_CellContentClick);
             // 
