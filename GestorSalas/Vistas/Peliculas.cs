@@ -13,9 +13,10 @@ namespace GestorSalas
         private Panel panelPeliculas;  
         private baseDatosServicios baseDatosServicios;
         public Empleado empleado;
+        public Venta venta;
         public Peliculas(Empleado empleado)
         {
-
+            
             this.empleado = empleado;
             InitializeComponent();
             InitializeComponent();
@@ -23,7 +24,8 @@ namespace GestorSalas
             panelPeliculas = new Panel(); 
             panelPeliculas.AutoScroll = true; 
             panelPeliculas.Dock = DockStyle.Fill;  
-            this.Controls.Add(panelPeliculas); 
+            this.Controls.Add(panelPeliculas);
+            venta = baseDatosServicios.GenerarVenta(empleado);
         }
 
         private void btnCambiarUsuario_Click(object sender, EventArgs e)
@@ -78,7 +80,7 @@ namespace GestorSalas
 
         private void Peliculas_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void gestionarBaseBtn_Click(object sender, EventArgs e)
@@ -215,7 +217,7 @@ namespace GestorSalas
 
 
 
-                Venta venta = baseDatosServicios.GenerarVenta(empleado);
+                
                 Funciones funciones = new Funciones(idPelicula,empleado,venta);
 
               
@@ -228,6 +230,16 @@ namespace GestorSalas
 
         private void Peliculas_Load_1(object sender, EventArgs e)
         {
+
+        }
+
+        private void ComprarDulcesbtn_Click(object sender, EventArgs e)
+        {
+            VentaDulces ventaDulces = new VentaDulces(venta);
+            this.Hide();
+            ventaDulces.Owner = this;
+            ventaDulces.ShowDialog();
+            this.Show();
 
         }
     }

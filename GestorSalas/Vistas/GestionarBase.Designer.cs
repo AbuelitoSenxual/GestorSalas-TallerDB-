@@ -2,15 +2,8 @@
 {
     partial class GestionarBase
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +15,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.gesPeliculaBtn = new System.Windows.Forms.Button();
@@ -38,11 +27,11 @@
             this.gesPeliculaBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.gesPeliculaBtn.FlatAppearance.BorderSize = 0;
             this.gesPeliculaBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gesPeliculaBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.gesPeliculaBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.gesPeliculaBtn.ForeColor = System.Drawing.Color.White;
-            this.gesPeliculaBtn.Location = new System.Drawing.Point(50, 50);
+            this.gesPeliculaBtn.Location = new System.Drawing.Point(100, 50);
             this.gesPeliculaBtn.Name = "gesPeliculaBtn";
-            this.gesPeliculaBtn.Size = new System.Drawing.Size(140, 100);
+            this.gesPeliculaBtn.Size = new System.Drawing.Size(200, 50);
             this.gesPeliculaBtn.TabIndex = 0;
             this.gesPeliculaBtn.Text = "Gestionar Películas";
             this.gesPeliculaBtn.UseVisualStyleBackColor = false;
@@ -53,11 +42,11 @@
             this.gestionarEmplBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
             this.gestionarEmplBtn.FlatAppearance.BorderSize = 0;
             this.gestionarEmplBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gestionarEmplBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.gestionarEmplBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.gestionarEmplBtn.ForeColor = System.Drawing.Color.White;
-            this.gestionarEmplBtn.Location = new System.Drawing.Point(210, 50);
+            this.gestionarEmplBtn.Location = new System.Drawing.Point(100, 130);
             this.gestionarEmplBtn.Name = "gestionarEmplBtn";
-            this.gestionarEmplBtn.Size = new System.Drawing.Size(140, 100);
+            this.gestionarEmplBtn.Size = new System.Drawing.Size(200, 50);
             this.gestionarEmplBtn.TabIndex = 1;
             this.gestionarEmplBtn.Text = "Gestionar Empleados";
             this.gestionarEmplBtn.UseVisualStyleBackColor = false;
@@ -70,9 +59,9 @@
             this.volverBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.volverBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.volverBtn.ForeColor = System.Drawing.Color.White;
-            this.volverBtn.Location = new System.Drawing.Point(160, 180);
+            this.volverBtn.Location = new System.Drawing.Point(150, 210);
             this.volverBtn.Name = "volverBtn";
-            this.volverBtn.Size = new System.Drawing.Size(80, 40);
+            this.volverBtn.Size = new System.Drawing.Size(100, 40);
             this.volverBtn.TabIndex = 2;
             this.volverBtn.Text = "Volver";
             this.volverBtn.UseVisualStyleBackColor = false;
@@ -81,11 +70,11 @@
             // GestionarBase
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(31)))));
-            this.ClientSize = new System.Drawing.Size(400, 250);
+            this.ClientSize = new System.Drawing.Size(400, 300);
             this.Controls.Add(this.volverBtn);
             this.Controls.Add(this.gestionarEmplBtn);
             this.Controls.Add(this.gesPeliculaBtn);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "GestionarBase";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestión de Recursos";

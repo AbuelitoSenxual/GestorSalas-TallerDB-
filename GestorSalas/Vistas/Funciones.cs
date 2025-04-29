@@ -79,7 +79,7 @@ namespace GestorSalas
                 this.Hide();
                 frmAsientos.Owner = this;
                 frmAsientos.ShowDialog();
-                this.Show();
+                this.Close();
             }
             else
             {

@@ -30,6 +30,7 @@
         {
             this.btnCambiarUsuario = new System.Windows.Forms.Button();
             this.gestionarBaseBtn = new System.Windows.Forms.Button();
+            this.ComprarDulcesbtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCambiarUsuario
@@ -39,7 +40,7 @@
             this.btnCambiarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCambiarUsuario.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnCambiarUsuario.ForeColor = System.Drawing.Color.White;
-            this.btnCambiarUsuario.Location = new System.Drawing.Point(509, 49);
+            this.btnCambiarUsuario.Location = new System.Drawing.Point(509, 216);
             this.btnCambiarUsuario.Name = "btnCambiarUsuario";
             this.btnCambiarUsuario.Size = new System.Drawing.Size(200, 50);
             this.btnCambiarUsuario.TabIndex = 1;
@@ -49,7 +50,6 @@
             // 
             // gestionarBaseBtn
             // 
-
             this.gestionarBaseBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
             this.gestionarBaseBtn.FlatAppearance.BorderSize = 0;
             this.gestionarBaseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -63,11 +63,26 @@
             this.gestionarBaseBtn.UseVisualStyleBackColor = false;
             this.gestionarBaseBtn.Click += new System.EventHandler(this.gestionarBaseBtn_Click);
             // 
+            // ComprarDulcesbtn
+            // 
+            this.ComprarDulcesbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
+            this.ComprarDulcesbtn.FlatAppearance.BorderSize = 0;
+            this.ComprarDulcesbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ComprarDulcesbtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.ComprarDulcesbtn.ForeColor = System.Drawing.Color.White;
+            this.ComprarDulcesbtn.Location = new System.Drawing.Point(509, 62);
+            this.ComprarDulcesbtn.Name = "ComprarDulcesbtn";
+            this.ComprarDulcesbtn.Size = new System.Drawing.Size(200, 50);
+            this.ComprarDulcesbtn.TabIndex = 4;
+            this.ComprarDulcesbtn.Text = "Comprar Dulces";
+            this.ComprarDulcesbtn.UseVisualStyleBackColor = false;
+            this.ComprarDulcesbtn.Click += new System.EventHandler(this.ComprarDulcesbtn_Click);
+            // 
             // Peliculas
             // 
-
-            this.BackColor = System.Drawing.ColorTranslator.FromHtml("#201e1f");
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(31)))));
             this.ClientSize = new System.Drawing.Size(732, 559);
+            this.Controls.Add(this.ComprarDulcesbtn);
             this.Controls.Add(this.btnCambiarUsuario);
             this.Controls.Add(this.gestionarBaseBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -85,5 +100,6 @@
 
         private System.Windows.Forms.Button btnCambiarUsuario;
         private System.Windows.Forms.Button gestionarBaseBtn;
+        private System.Windows.Forms.Button ComprarDulcesbtn;
     }
 }

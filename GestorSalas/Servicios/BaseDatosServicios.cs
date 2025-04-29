@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -636,11 +637,12 @@ namespace GestorSalas.Servicios
                         while (reader.Read())
                         {
                             VentasDulces.Add((
-                                reader.GetString(0),        // NombreProducto
-                                reader.GetInt32(1),         // Cantidad
-                                (float)reader.GetDouble(2)  // Costo (convertir a float)
+                                reader.GetString(0),  // NombreProducto
+                                reader.GetInt32(1),   // Cantidad
+                                (float)reader.GetInt32(2) // Costo convertido de int a float
                             ));
                         }
+
                     }
                 }
             }
@@ -655,67 +657,144 @@ namespace GestorSalas.Servicios
         }
 
         public string ProcesarTicket(
-    List<(string NombrePeli, string NombreSala, string NumeroAsiento, float Costo)> ventasPelicula,
-    List<(string NombreProducto, int Cantidad, float Costo)> ventasDulces)
-        {
-            // Variables para acumular
-            float subtotal = 0f;
-            float iva = 0f;
-            float total = 0f;
-
-            // Armamos el ticket usando StringBuilder
-            var ticket = new System.Text.StringBuilder();
-
-            // Encabezado
-            ticket.AppendLine("===================================");
-            ticket.AppendLine("             CINE CINEMA           ");
-            ticket.AppendLine("         ¡Gracias por tu visita!   ");
-            ticket.AppendLine($"Fecha: {DateTime.Now:dd/MM/yyyy HH:mm}");
-            ticket.AppendLine("===================================\n");
-
-            // Sección de Películas
-            ticket.AppendLine("Películas:");
-            foreach (var venta in ventasPelicula)
-            {
-                ticket.AppendLine($"- {venta.NombrePeli}");
-                ticket.AppendLine($"  Sala: {venta.NombreSala}  Asiento: {venta.NumeroAsiento}");
-                ticket.AppendLine($"  Costo: ${venta.Costo:F2}\n");
-                subtotal += venta.Costo;
-            }
-
-            ticket.AppendLine("-----------------------------------");
-
-            // Sección de Dulcería (solo si hay productos)
-            if (ventasDulces.Count > 0)
-            {
-                ticket.AppendLine("Dulcería:");
-                foreach (var dulce in ventasDulces)
+            List<(string NombrePeli, string NombreSala, string NumeroAsiento, float Costo)> ventasPelicula,
+            List<(string NombreProducto, int Cantidad, float Costo)> ventasDulces)
                 {
-                    float costoProducto = dulce.Costo * dulce.Cantidad;
-                    ticket.AppendLine($"- {dulce.NombreProducto} x{dulce.Cantidad}");
-                    ticket.AppendLine($"  Total: ${costoProducto:F2}\n");
-                    subtotal += costoProducto;
+                    // Variables para acumular
+                    float subtotal = 0f;
+                    float iva = 0f;
+                    float total = 0f;
+
+                    // Armamos el ticket usando StringBuilder
+                    var ticket = new System.Text.StringBuilder();
+
+                    // Encabezado
+                    ticket.AppendLine("===================================");
+                    ticket.AppendLine("             CINE CINEMA           ");
+                    ticket.AppendLine("         ¡Gracias por tu visita!   ");
+                    ticket.AppendLine($"Fecha: {DateTime.Now:dd/MM/yyyy HH:mm}");
+                    ticket.AppendLine("===================================\n");
+
+                    // Sección de Películas
+                    ticket.AppendLine("Películas:");
+                    foreach (var venta in ventasPelicula)
+                    {
+                        ticket.AppendLine($"- {venta.NombrePeli}");
+                        ticket.AppendLine($"  Sala: {venta.NombreSala}  Asiento: {venta.NumeroAsiento}");
+                        ticket.AppendLine($"  Costo: ${venta.Costo:F2}\n");
+                        subtotal += venta.Costo;
+                    }
+
+                    ticket.AppendLine("-----------------------------------");
+
+                    // Sección de Dulcería (solo si hay productos)
+                    if (ventasDulces.Count > 0)
+                    {
+                        ticket.AppendLine("Dulcería:");
+                        foreach (var dulce in ventasDulces)
+                        {
+                            float costoProducto = dulce.Costo * dulce.Cantidad;
+                            ticket.AppendLine($"- {dulce.NombreProducto} x{dulce.Cantidad}");
+                            ticket.AppendLine($"  Total: ${costoProducto:F2}\n");
+                            subtotal += costoProducto;
+                        }
+                    }
+
+                    ticket.AppendLine("-----------------------------------");
+
+                    // Cálculo de totales
+                    iva = subtotal * 0.16f; // IVA 16%
+                    total = subtotal + iva;
+
+                    ticket.AppendLine($"Subtotal:      ${subtotal:F2}");
+                    ticket.AppendLine($"IVA (16%):      ${iva:F2}");
+                    ticket.AppendLine($"Total a pagar:  ${total:F2}");
+
+                    ticket.AppendLine("\n===================================");
+                    ticket.AppendLine("     ¡Gracias por su preferencia!  ");
+                    ticket.AppendLine("           Cine Cinema 🎬🍿         ");
+                    ticket.AppendLine("===================================");
+
+                    return ticket.ToString();
+                }
+
+
+        public List<(string NombreProducto, int Stock, string RutaImagen, decimal Precio)> ObtenerProductosConStock()
+        {
+            var productos = new List<(string NombreProducto, int Stock, string RutaImagen, decimal Precio)>();
+            string query = @"
+        SELECT Nombre, Costo, Stock
+        FROM Consumible
+    ";
+
+            using (var conexion = new SqlConnection(cadenaConexion))
+            {
+                conexion.Open();
+                using (var comando = new SqlCommand(query, conexion))
+                {
+                    using (var reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string nombre = reader.GetString(0).Trim();
+                            decimal precio = (decimal)reader.GetInt32(1);
+                            int stock = reader.GetInt32(2);
+
+                            // Buscar imagen con extensiones comunes
+                            string nombreBase = Path.Combine("ImagenesProductos", nombre);
+                            string[] extensiones = { ".jpg", ".png" };
+                            string rutaAbsoluta = null;
+
+                            foreach (var ext in extensiones)
+                            {
+                                string posibleRuta = Path.Combine(Application.StartupPath, nombreBase + ext);
+                                if (File.Exists(posibleRuta))
+                                {
+                                    rutaAbsoluta = posibleRuta;
+                                    break;
+                                }
+                            }
+
+                            // Si no se encuentra ninguna imagen, dejar la ruta vacía
+                            if (rutaAbsoluta == null)
+                                rutaAbsoluta = "";
+
+                            productos.Add((nombre, stock, rutaAbsoluta, precio));
+                        }
+                    }
                 }
             }
 
-            ticket.AppendLine("-----------------------------------");
-
-            // Cálculo de totales
-            iva = subtotal * 0.16f; // IVA 16%
-            total = subtotal + iva;
-
-            ticket.AppendLine($"Subtotal:      ${subtotal:F2}");
-            ticket.AppendLine($"IVA (16%):      ${iva:F2}");
-            ticket.AppendLine($"Total a pagar:  ${total:F2}");
-
-            ticket.AppendLine("\n===================================");
-            ticket.AppendLine("     ¡Gracias por su preferencia!  ");
-            ticket.AppendLine("           Cine Cinema 🎬🍿         ");
-            ticket.AppendLine("===================================");
-
-            return ticket.ToString();
+            return productos;
         }
+        public void InsertarProductosComprados(int idVenta, List<(string NombreProducto, int Cantidad)> productosComprados)
+        {
+            using (var conexion = new SqlConnection(cadenaConexion))
+            {
+                conexion.Open();
 
+                foreach (var producto in productosComprados)
+                {
+                    string query = @"
+                INSERT INTO CompraDulceria (ID_Consumible, ID_Venta, Cantidad)
+                VALUES (
+                    (SELECT ID_Consumible FROM Consumible WHERE Nombre = @nombreProducto),
+                    @idVenta,
+                    @cantidad
+                );
+            ";
+
+                    using (var comando = new SqlCommand(query, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@nombreProducto", producto.NombreProducto);
+                        comando.Parameters.AddWithValue("@idVenta", idVenta);
+                        comando.Parameters.AddWithValue("@cantidad", producto.Cantidad);
+
+                        comando.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
 
 
 

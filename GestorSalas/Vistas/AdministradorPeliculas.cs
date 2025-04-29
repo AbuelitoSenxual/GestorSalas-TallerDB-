@@ -97,5 +97,10 @@ namespace GestorSalas.Vistas
                 MessageBox.Show("Por favor, seleccione una fila para modificar.");
             }
         }
+
+        private void dgvPelicula_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

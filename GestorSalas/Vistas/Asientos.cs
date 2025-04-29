@@ -102,27 +102,30 @@ namespace GestorSalas
             // Comprobar la respuesta del usuario
             if (resultado == DialogResult.Yes)
             {
-                List<int> idsAsientos = bd.ObtenerIdsAsientos(ObtenerNombresBotonesSeleccionados(), funciones.ID_Funcion);
 
-                foreach (int id in idsAsientos)
-                {
-                    Reservacion reservacion = new Reservacion
+    
+                if (ObtenerNombresBotonesSeleccionados().Count != 0) {
+
+                    List<int> idsAsientos = bd.ObtenerIdsAsientos(ObtenerNombresBotonesSeleccionados(), funciones.ID_Funcion);
+                    foreach (int id in idsAsientos)
                     {
-                        ID_Asiento = id,
-                        ID_Funcion = funciones.ID_Funcion,
-                        ID_Empleado = empleado.id_Empleado,
-                        ID_Venta = Venta.ID_Venta,
-                        Fecha_Reservacion = DateTime.Now
-                    };
-                    listaReservaciones.Add(reservacion);
+                        Reservacion reservacion = new Reservacion
+                        {
+                            ID_Asiento = id,
+                            ID_Funcion = funciones.ID_Funcion,
+                            ID_Empleado = empleado.id_Empleado,
+                            ID_Venta = Venta.ID_Venta,
+                            Fecha_Reservacion = DateTime.Now
+                        };
+                        listaReservaciones.Add(reservacion);
+                    }
+                    bd.InsertarReservaciones(listaReservaciones);
+
                 }
 
-                bd.InsertarReservaciones(listaReservaciones);
-
-                string ticket = bd.GenerarTicketVenta(Venta.ID_Venta); // Usas el método que hicimos
-
-                MessageBox.Show(ticket, "Ticket de Venta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                VentaDulces ventaDulces = new VentaDulces(Venta);
+                ventaDulces.ShowDialog();
+                
                 this.Close();
             }
             else if (resultado == DialogResult.No)

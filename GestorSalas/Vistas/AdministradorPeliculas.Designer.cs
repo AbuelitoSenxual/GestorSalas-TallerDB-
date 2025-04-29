@@ -2,15 +2,8 @@
 {
     partial class AdministradorPeliculas
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +15,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.dgvPelicula = new System.Windows.Forms.DataGridView();
@@ -38,21 +27,22 @@
             // dgvPelicula
             // 
             this.dgvPelicula.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPelicula.Location = new System.Drawing.Point(31, 21);
+            this.dgvPelicula.Location = new System.Drawing.Point(30, 30);
             this.dgvPelicula.Name = "dgvPelicula";
-            this.dgvPelicula.Size = new System.Drawing.Size(536, 393);
+            this.dgvPelicula.Size = new System.Drawing.Size(550, 400);
             this.dgvPelicula.TabIndex = 0;
+            this.dgvPelicula.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPelicula_CellContentClick);
             // 
             // gesPeliculaBtn
             // 
             this.gesPeliculaBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.gesPeliculaBtn.FlatAppearance.BorderSize = 0;
             this.gesPeliculaBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gesPeliculaBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.gesPeliculaBtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.gesPeliculaBtn.ForeColor = System.Drawing.Color.White;
-            this.gesPeliculaBtn.Location = new System.Drawing.Point(635, 21);
+            this.gesPeliculaBtn.Location = new System.Drawing.Point(620, 50);
             this.gesPeliculaBtn.Name = "gesPeliculaBtn";
-            this.gesPeliculaBtn.Size = new System.Drawing.Size(140, 100);
+            this.gesPeliculaBtn.Size = new System.Drawing.Size(150, 50);
             this.gesPeliculaBtn.TabIndex = 1;
             this.gesPeliculaBtn.Text = "Añadir Películas";
             this.gesPeliculaBtn.UseVisualStyleBackColor = false;
@@ -60,14 +50,14 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.btnModificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
             this.btnModificar.FlatAppearance.BorderSize = 0;
-            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnModificar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnModificar.ForeColor = System.Drawing.Color.White;
-            this.btnModificar.Location = new System.Drawing.Point(635, 165);
+            this.btnModificar.Location = new System.Drawing.Point(620, 150);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(140, 100);
+            this.btnModificar.Size = new System.Drawing.Size(150, 50);
             this.btnModificar.TabIndex = 2;
             this.btnModificar.Text = "Modificar Películas";
             this.btnModificar.UseVisualStyleBackColor = false;
@@ -75,14 +65,14 @@
             // 
             // btnEliminarPelicula
             // 
-            this.btnEliminarPelicula.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.btnEliminarPelicula.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
             this.btnEliminarPelicula.FlatAppearance.BorderSize = 0;
             this.btnEliminarPelicula.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminarPelicula.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnEliminarPelicula.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnEliminarPelicula.ForeColor = System.Drawing.Color.White;
-            this.btnEliminarPelicula.Location = new System.Drawing.Point(635, 314);
+            this.btnEliminarPelicula.Location = new System.Drawing.Point(620, 250);
             this.btnEliminarPelicula.Name = "btnEliminarPelicula";
-            this.btnEliminarPelicula.Size = new System.Drawing.Size(140, 100);
+            this.btnEliminarPelicula.Size = new System.Drawing.Size(150, 50);
             this.btnEliminarPelicula.TabIndex = 3;
             this.btnEliminarPelicula.Text = "Eliminar Películas";
             this.btnEliminarPelicula.UseVisualStyleBackColor = false;
@@ -90,15 +80,16 @@
             // 
             // AdministradorPeliculas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(31)))));
+            this.ClientSize = new System.Drawing.Size(820, 460);
             this.Controls.Add(this.btnEliminarPelicula);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.gesPeliculaBtn);
             this.Controls.Add(this.dgvPelicula);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AdministradorPeliculas";
-            this.Text = "AdministradorPeliculas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Administrador de Películas";
             this.Activated += new System.EventHandler(this.AdministradorPeliculas_Activated);
             this.Load += new System.EventHandler(this.AdministradorPeliculas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPelicula)).EndInit();

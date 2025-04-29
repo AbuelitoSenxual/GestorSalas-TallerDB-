@@ -1,209 +1,364 @@
-﻿using System;
+﻿using GestorSalas.Modelos;
+using GestorSalas.Servicios;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GestorSalas.Vistas
 {
     public partial class VentaDulces : Form
+
     {
-        // Propiedades del producto
-        private string nombreProducto = "Chocolate Premium";
-        private decimal precioProducto = 25.50m;
-        private int stockDisponible = 50;
-        private string rutaImagen = ""; // Ruta a la imagen del producto
+        Venta Venta = new Venta();
+        baseDatosServicios db = new baseDatosServicios();
+        // Lista para almacenar los productos y su stock
+        private List<(string NombreProducto, int Stock, string RutaImagen, decimal Precio)> listaProductos;
 
-        // Controles del formulario que añadiremos manualmente
-        private PictureBox pictureBoxProducto;
-        private Label labelNombreProducto;
-        private Label labelPrecio;
-        private Label labelStock;
-        private NumericUpDown numericCantidad;
-        private Label labelTotal;
-        private Button buttonComprar;
-        private Button buttonCancelar;
+        // Lista para almacenar los productos comprados
+        private List<(string NombreProducto, int Cantidad)> productosComprados;
 
-        public VentaDulces()
+        // Constructor
+        public VentaDulces(Venta venta)
         {
+            this.Venta = venta;
             InitializeComponent();
+            ConfigurarFormulario();
+            CargarProductos();
+            CrearControlesProductos();
         }
-
         private void VentaDulces_Load(object sender, EventArgs e)
         {
-            // Configurar el formulario
-            this.Text = "Venta de Dulces";
-            this.Size = new Size(500, 400);
-
-            // Crear y configurar los controles
-            CrearControles();
-
-            // Cargar los datos del producto
-            CargarDatosProducto();
+            // Código a ejecutar cuando el formulario cargue (opcional).
         }
 
-        private void CrearControles()
+
+        private void ConfigurarFormulario()
         {
-            // PictureBox para la imagen del producto
-            pictureBoxProducto = new PictureBox();
-            pictureBoxProducto.Size = new Size(200, 200);
-            pictureBoxProducto.Location = new Point(20, 20);
-            pictureBoxProducto.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBoxProducto.BorderStyle = BorderStyle.FixedSingle;
-            this.Controls.Add(pictureBoxProducto);
+            this.Text = "Venta de Productos";
+            this.Size = new Size(800, 600);
+            this.StartPosition = FormStartPosition.CenterScreen;
 
-            // Label para el nombre del producto
-            labelNombreProducto = new Label();
-            labelNombreProducto.AutoSize = true;
-            labelNombreProducto.Font = new Font("Arial", 12, FontStyle.Bold);
-            labelNombreProducto.Location = new Point(240, 20);
-            this.Controls.Add(labelNombreProducto);
-
-            // Label para el precio
-            labelPrecio = new Label();
-            labelPrecio.AutoSize = true;
-            labelPrecio.Font = new Font("Arial", 10);
-            labelPrecio.Location = new Point(240, 50);
-            this.Controls.Add(labelPrecio);
-
-            // Label para el stock
-            labelStock = new Label();
-            labelStock.AutoSize = true;
-            labelStock.Font = new Font("Arial", 10);
-            labelStock.Location = new Point(240, 80);
-            this.Controls.Add(labelStock);
-
-            // Label para "Cantidad:"
-            Label labelCantidadTexto = new Label();
-            labelCantidadTexto.Text = "Cantidad:";
-            labelCantidadTexto.AutoSize = true;
-            labelCantidadTexto.Location = new Point(240, 120);
-            this.Controls.Add(labelCantidadTexto);
-
-            // NumericUpDown para seleccionar la cantidad
-            numericCantidad = new NumericUpDown();
-            numericCantidad.Location = new Point(310, 118);
-            numericCantidad.Minimum = 1;
-            numericCantidad.Maximum = stockDisponible;
-            numericCantidad.Value = 1;
-            numericCantidad.Width = 60;
-            numericCantidad.ValueChanged += NumericCantidad_ValueChanged;
-            this.Controls.Add(numericCantidad);
-
-            // Label para el total
-            labelTotal = new Label();
-            labelTotal.AutoSize = true;
-            labelTotal.Font = new Font("Arial", 12, FontStyle.Bold);
-            labelTotal.Location = new Point(240, 160);
-            this.Controls.Add(labelTotal);
-
-            // Botón Comprar
-            buttonComprar = new Button();
-            buttonComprar.Text = "Comprar";
-            buttonComprar.Location = new Point(240, 200);
-            buttonComprar.Size = new Size(100, 30);
-            buttonComprar.Click += ButtonComprar_Click;
-            this.Controls.Add(buttonComprar);
-
-            // Botón Cancelar
-            buttonCancelar = new Button();
-            buttonCancelar.Text = "Cancelar";
-            buttonCancelar.Location = new Point(350, 200);
-            buttonCancelar.Size = new Size(100, 30);
-            buttonCancelar.Click += ButtonCancelar_Click;
-            this.Controls.Add(buttonCancelar);
-        }
-
-        private void CargarDatosProducto()
-        {
-            // Mostrar los datos del producto en los controles
-            labelNombreProducto.Text = nombreProducto;
-            labelPrecio.Text = $"Precio: ${precioProducto}";
-            labelStock.Text = $"Stock disponible: {stockDisponible}";
-
-            // Cargar imagen (usando una imagen de placeholder si no hay ruta)
-            try
+            // Botones principales
+            Button btnComprar = new Button
             {
-                if (!string.IsNullOrEmpty(rutaImagen) && System.IO.File.Exists(rutaImagen))
+                Text = "Comprar",
+                Size = new Size(120, 40),
+                Location = new Point(550, 500),
+                BackColor = Color.Green,
+                ForeColor = Color.White,
+                Font = new Font("Arial", 12, FontStyle.Bold)
+            };
+            btnComprar.Click += BtnComprar_Click;
+
+            Button btnCancelar = new Button
+            {
+                Text = "Cancelar",
+                Size = new Size(120, 40),
+                Location = new Point(680, 500),
+                BackColor = Color.Red,
+                ForeColor = Color.White,
+                Font = new Font("Arial", 12, FontStyle.Bold)
+            };
+            btnCancelar.Click += BtnCancelar_Click;
+
+            this.Controls.Add(btnComprar);
+            this.Controls.Add(btnCancelar);
+
+            // Panel para productos
+            Panel panelProductos = new Panel
+            {
+                AutoScroll = true,
+                Location = new Point(20, 20),
+                Size = new Size(750, 450),
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            this.Controls.Add(panelProductos);
+        }
+
+        private void CargarProductos()
+        {
+            // Método que simula la carga de productos
+            // En tu caso, aquí llamarías al método que te trae la lista de productos
+            listaProductos = db.ObtenerProductosConStock();
+
+            productosComprados = new List<(string NombreProducto, int Cantidad)>();
+        }
+
+        private void CrearControlesProductos()
+        {
+            Panel panelProductos = this.Controls.OfType<Panel>().First();
+            int x = 10;
+            int y = 10;
+            int contador = 0;
+
+            foreach (var producto in listaProductos)
+            {
+                // Panel para cada producto
+                Panel panelProducto = new Panel
                 {
-                    pictureBoxProducto.Image = Image.FromFile(rutaImagen);
+                    Size = new Size(230, 200),
+                    Location = new Point(x, y),
+                    BorderStyle = BorderStyle.FixedSingle
+                };
+
+                // Imagen del producto
+                PictureBox imgProducto = new PictureBox
+                {
+                    Size = new Size(100, 100),
+                    Location = new Point(65, 10),
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                    BorderStyle = BorderStyle.FixedSingle
+                };
+
+                try
+                {
+                    imgProducto.Image = Image.FromFile(producto.RutaImagen);
+                }
+                catch
+                {
+                    // Si no encuentra la imagen, muestra un placeholder
+                    imgProducto.BackColor = Color.LightGray;
+                }
+
+                // Nombre del producto
+                Label lblNombre = new Label
+                {
+                    Text = producto.NombreProducto,
+                    Location = new Point(10, 115),
+                    Size = new Size(210, 20),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Font = new Font("Arial", 10, FontStyle.Bold)
+                };
+
+                // Precio y stock
+                Label lblPrecioStock = new Label
+                {
+                    Text = $"Precio: ${producto.Precio} - Stock: {producto.Stock}",
+                    Location = new Point(10, 135),
+                    Size = new Size(210, 20),
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
+
+                // Control para seleccionar cantidad
+                NumericUpDown nudCantidad = new NumericUpDown
+                {
+                    Location = new Point(85, 160),
+                    Size = new Size(60, 25),
+                    Minimum = 0,
+                    Maximum = producto.Stock,
+                    Value = 0,
+                    Tag = producto.NombreProducto // Guardamos el nombre del producto como Tag
+                };
+                nudCantidad.ValueChanged += NudCantidad_ValueChanged;
+
+                // Agregar controles al panel del producto
+                panelProducto.Controls.Add(imgProducto);
+                panelProducto.Controls.Add(lblNombre);
+                panelProducto.Controls.Add(lblPrecioStock);
+                panelProducto.Controls.Add(nudCantidad);
+
+                // Agregar panel del producto al panel principal
+                panelProductos.Controls.Add(panelProducto);
+
+                // Actualizar posición para el siguiente producto
+                contador++;
+                if (contador % 3 == 0)
+                {
+                    x = 10;
+                    y += 210;
                 }
                 else
                 {
-                    // Crear una imagen de placeholder
-                    Bitmap bmp = new Bitmap(200, 200);
-                    using (Graphics g = Graphics.FromImage(bmp))
-                    {
-                        g.Clear(Color.LightGray);
-                        g.DrawString("Imagen no\ndisponible", new Font("Arial", 12), Brushes.Black, new PointF(50, 80));
-                    }
-                    pictureBoxProducto.Image = bmp;
+                    x += 240;
                 }
             }
-            catch
+        }
+
+        private void NudCantidad_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown nud = (NumericUpDown)sender;
+            string nombreProducto = nud.Tag.ToString();
+            int cantidad = (int)nud.Value;
+
+            // Actualizar o agregar a la lista de productos comprados
+            ActualizarProductosComprados(nombreProducto, cantidad);
+        }
+
+        private void ActualizarProductosComprados(string nombreProducto, int cantidad)
+        {
+            // Buscar si el producto ya está en la lista de comprados
+            int index = productosComprados.FindIndex(p => p.NombreProducto == nombreProducto);
+
+            if (cantidad > 0)
             {
-                MessageBox.Show("Error al cargar la imagen del producto.");
+                if (index >= 0)
+                {
+                    // Actualizar cantidad si ya existe
+                    productosComprados[index] = (nombreProducto, cantidad);
+                }
+                else
+                {
+                    // Agregar nuevo producto a la lista
+                    productosComprados.Add((nombreProducto, cantidad));
+                }
+            }
+            else if (index >= 0)
+            {
+                // Eliminar de la lista si la cantidad es 0
+                productosComprados.RemoveAt(index);
+            }
+        }
+
+        private void BtnComprar_Click(object sender, EventArgs e)
+        {
+            if (productosComprados.Count == 0)
+            {
+                MessageBox.Show("No has seleccionado ningún producto", "Aviso",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
 
-            // Actualizar el total
-            ActualizarTotal();
-        }
+            // Mostrar resumen de compra
+            string resumen = "Resumen de compra:\n\n";
+            decimal total = 0;
 
-        private void ActualizarTotal()
-        {
-            decimal total = precioProducto * numericCantidad.Value;
-            labelTotal.Text = $"Total: ${total}";
-        }
-
-        private void NumericCantidad_ValueChanged(object sender, EventArgs e)
-        {
-            ActualizarTotal();
-        }
-
-        private void ButtonComprar_Click(object sender, EventArgs e)
-        {
-            int cantidad = (int)numericCantidad.Value;
-
-            if (cantidad <= stockDisponible)
+            foreach (var producto in productosComprados)
             {
-                decimal total = precioProducto * cantidad;
-                MessageBox.Show($"Compra realizada con éxito!\n\nProducto: {nombreProducto}\nCantidad: {cantidad}\nTotal: ${total}",
-                    "Compra Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var infoProducto = listaProductos.Find(p => p.NombreProducto == producto.NombreProducto);
+                decimal subtotal = infoProducto.Precio * producto.Cantidad;
+                resumen += $"{producto.NombreProducto} x {producto.Cantidad} = ${subtotal}\n";
+                total += subtotal;
+            }
 
-                // Actualizar el stock
-                stockDisponible -= cantidad;
-                labelStock.Text = $"Stock disponible: {stockDisponible}";
+            resumen += $"\nTotal: ${total}";
 
-                // Actualizar el máximo del control NumericUpDown
-                numericCantidad.Maximum = stockDisponible;
+            DialogResult result = MessageBox.Show(resumen + "\n\n¿Deseas confirmar la compra?",
+                "Confirmar Compra", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                // Si no hay stock, deshabilitar el botón de compra
-                if (stockDisponible == 0)
+            if (result == DialogResult.Yes)
+            {
+                // Aquí puedes llamar al método que procesa la compra
+                ProcesarCompra();
+            }
+        }
+
+        private void ProcesarCompra()
+        {
+            // Actualizar stock
+            foreach (var compra in productosComprados)
+            {
+                int index = listaProductos.FindIndex(p => p.NombreProducto == compra.NombreProducto);
+                if (index >= 0)
                 {
-                    buttonComprar.Enabled = false;
-                    numericCantidad.Enabled = false;
-                    MessageBox.Show("Producto agotado.", "Sin Stock", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var producto = listaProductos[index];
+                    listaProductos[index] = (producto.NombreProducto, producto.Stock - compra.Cantidad,
+                        producto.RutaImagen, producto.Precio);
+                }
+            }
+
+            MessageBox.Show("¡Compra realizada con éxito!", "Éxito",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Aquí puedes enviar la lista de productos comprados
+            // a otro método o formulario
+            EnviarListaComprados(productosComprados);
+
+            // Reiniciar formulario
+            ReiniciarFormulario();
+        }
+
+        private void EnviarListaComprados(List<(string NombreProducto, int Cantidad)> lista)
+        {
+            // Este método enviaría la lista de productos comprados
+            // a donde sea necesario en tu aplicación
+
+            // Por ejemplo:
+            // otroFormulario.RecibirCompra(lista);
+
+            // O simplemente devolver la lista si este método es llamado desde otro lugar
+            // return lista;
+
+  
+            db.InsertarProductosComprados(Venta.ID_Venta, productosComprados);
+            string ticket = db.GenerarTicketVenta(Venta.ID_Venta); // Usas el método que hicimos
+
+            MessageBox.Show(ticket, "Ticket de Venta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            this.Close();
+
+
+
+        }
+
+        private void ReiniciarFormulario()
+        {
+            // Limpiar la lista de productos comprados
+            productosComprados.Clear();
+
+            // Reiniciar todos los NumericUpDown a 0
+            Panel panelProductos = this.Controls.OfType<Panel>().First();
+            foreach (Panel panelProducto in panelProductos.Controls)
+            {
+                foreach (NumericUpDown nud in panelProducto.Controls.OfType<NumericUpDown>())
+                {
+                    nud.Value = 0;
+                }
+            }
+
+            // Actualizar la interfaz con el nuevo stock
+            ActualizarInterfazStock();
+        }
+
+        private void ActualizarInterfazStock()
+        {
+            Panel panelProductos = this.Controls.OfType<Panel>().First();
+            int i = 0;
+
+            foreach (Panel panelProducto in panelProductos.Controls)
+            {
+                if (i < listaProductos.Count)
+                {
+                    var producto = listaProductos[i];
+
+                    // Actualizar etiqueta de precio y stock
+                    foreach (Label lbl in panelProducto.Controls.OfType<Label>())
+                    {
+                        if (lbl.Text.StartsWith("Precio"))
+                        {
+                            lbl.Text = $"Precio: ${producto.Precio} - Stock: {producto.Stock}";
+                        }
+                    }
+
+                    // Actualizar máximo del NumericUpDown
+                    foreach (NumericUpDown nud in panelProducto.Controls.OfType<NumericUpDown>())
+                    {
+                        nud.Maximum = producto.Stock;
+                    }
+
+                    i++;
+                }
+            }
+        }
+
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            if (productosComprados.Count > 0)
+            {
+                DialogResult result = MessageBox.Show("¿Estás seguro de cancelar la compra?",
+                    "Confirmar Cancelación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    ReiniciarFormulario();
                 }
             }
             else
-            {
-                MessageBox.Show($"No hay suficiente stock disponible. Stock actual: {stockDisponible}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void ButtonCancelar_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("¿Está seguro que desea cancelar la compra?",
-                "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 this.Close();
             }
         }
     }
 }
-
