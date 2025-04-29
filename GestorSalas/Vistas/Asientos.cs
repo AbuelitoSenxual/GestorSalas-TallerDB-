@@ -118,6 +118,11 @@ namespace GestorSalas
                 }
 
                 bd.InsertarReservaciones(listaReservaciones);
+
+                string ticket = bd.GenerarTicketVenta(Venta.ID_Venta); // Usas el método que hicimos
+
+                MessageBox.Show(ticket, "Ticket de Venta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 this.Close();
             }
             else if (resultado == DialogResult.No)

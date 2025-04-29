@@ -1,6 +1,9 @@
 ﻿using GestorSalas.Servicios;
 using System;
 using System.Windows.Forms;
+using GestorSalas.Vistas;
+
+
 
 namespace GestorSalas
 {

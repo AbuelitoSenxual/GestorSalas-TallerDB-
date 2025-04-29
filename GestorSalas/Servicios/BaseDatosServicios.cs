@@ -582,6 +582,145 @@ namespace GestorSalas.Servicios
             }
         }
 
+        public string GenerarTicketVenta(int idVenta)
+        {
+            var VentasPelicula = new List<(string NombrePeli, string NombreSala, string NumeroAsiento, float Costo)>();
+            var VentasDulces = new List<(string NombreProducto, int Cantidad, float Costo)>();
+
+            var conexion = new SqlConnection(cadenaConexion);
+            using (conexion)
+            {
+                conexion.Open();
+
+                // Llenar VentasPelicula
+                string queryPeliculas = @"
+            SELECT p.Nombre AS NombrePeli, s.Nombre AS NombreSala, a.Numero AS NumeroAsiento, f.Costo
+            FROM Reservaciones r
+            INNER JOIN Funciones f ON r.ID_Funcion = f.ID_Funcion
+            INNER JOIN Peliculas p ON f.ID_Pelicula = p.ID_Pelicula
+            INNER JOIN Asientos a ON r.ID_Asiento = a.ID_Asiento
+            INNER JOIN Salas s ON f.ID_Sala = s.ID_Sala
+            WHERE r.ID_Venta = @idVenta";
+
+                using (var comando = new SqlCommand(queryPeliculas, conexion))
+                {
+                    comando.Parameters.AddWithValue("@idVenta", idVenta);
+
+                    using (var reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            VentasPelicula.Add((
+                                reader.GetString(0),         // NombrePeli
+                                reader.GetString(1),         // NombreSala
+                                reader.GetString(2),         // NumeroAsiento
+                                (float)reader.GetDouble(3)   // Costo (convertir a float)
+                            ));
+                        }
+                    }
+                }
+
+                // Llenar VentasDulces
+                string queryDulces = @"
+            SELECT c.Nombre AS NombreProducto, cd.Cantidad, c.Costo
+            FROM CompraDulceria cd
+            INNER JOIN Consumible c ON cd.ID_Consumible = c.ID_Consumible
+            WHERE cd.ID_Venta = @idVenta";
+
+                using (var comando = new SqlCommand(queryDulces, conexion))
+                {
+                    comando.Parameters.AddWithValue("@idVenta", idVenta);
+
+                    using (var reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            VentasDulces.Add((
+                                reader.GetString(0),        // NombreProducto
+                                reader.GetInt32(1),         // Cantidad
+                                (float)reader.GetDouble(2)  // Costo (convertir a float)
+                            ));
+                        }
+                    }
+                }
+            }
+
+
+            foreach (var venta in VentasPelicula)
+            {
+                Console.WriteLine($"Película: {venta.NombrePeli}, Sala: {venta.NombreSala}, Asiento: {venta.NumeroAsiento}, Costo: {venta.Costo}");
+            }
+
+            return ProcesarTicket(VentasPelicula, VentasDulces);
+        }
+
+        public string ProcesarTicket(
+    List<(string NombrePeli, string NombreSala, string NumeroAsiento, float Costo)> ventasPelicula,
+    List<(string NombreProducto, int Cantidad, float Costo)> ventasDulces)
+        {
+            // Variables para acumular
+            float subtotal = 0f;
+            float iva = 0f;
+            float total = 0f;
+
+            // Armamos el ticket usando StringBuilder
+            var ticket = new System.Text.StringBuilder();
+
+            // Encabezado
+            ticket.AppendLine("===================================");
+            ticket.AppendLine("             CINE CINEMA           ");
+            ticket.AppendLine("         ¡Gracias por tu visita!   ");
+            ticket.AppendLine($"Fecha: {DateTime.Now:dd/MM/yyyy HH:mm}");
+            ticket.AppendLine("===================================\n");
+
+            // Sección de Películas
+            ticket.AppendLine("Películas:");
+            foreach (var venta in ventasPelicula)
+            {
+                ticket.AppendLine($"- {venta.NombrePeli}");
+                ticket.AppendLine($"  Sala: {venta.NombreSala}  Asiento: {venta.NumeroAsiento}");
+                ticket.AppendLine($"  Costo: ${venta.Costo:F2}\n");
+                subtotal += venta.Costo;
+            }
+
+            ticket.AppendLine("-----------------------------------");
+
+            // Sección de Dulcería (solo si hay productos)
+            if (ventasDulces.Count > 0)
+            {
+                ticket.AppendLine("Dulcería:");
+                foreach (var dulce in ventasDulces)
+                {
+                    float costoProducto = dulce.Costo * dulce.Cantidad;
+                    ticket.AppendLine($"- {dulce.NombreProducto} x{dulce.Cantidad}");
+                    ticket.AppendLine($"  Total: ${costoProducto:F2}\n");
+                    subtotal += costoProducto;
+                }
+            }
+
+            ticket.AppendLine("-----------------------------------");
+
+            // Cálculo de totales
+            iva = subtotal * 0.16f; // IVA 16%
+            total = subtotal + iva;
+
+            ticket.AppendLine($"Subtotal:      ${subtotal:F2}");
+            ticket.AppendLine($"IVA (16%):      ${iva:F2}");
+            ticket.AppendLine($"Total a pagar:  ${total:F2}");
+
+            ticket.AppendLine("\n===================================");
+            ticket.AppendLine("     ¡Gracias por su preferencia!  ");
+            ticket.AppendLine("           Cine Cinema 🎬🍿         ");
+            ticket.AppendLine("===================================");
+
+            return ticket.ToString();
+        }
+
+
+
+
+
+
 
 
     }
