@@ -105,8 +105,7 @@ namespace GestorSalas.Servicios
 
         }
 
-        public DataTable peliculasInformacion()
-        {
+        public DataTable peliculasInformacion() {
 
             DataTable dt = new DataTable();
             conexion = new SqlConnection(cadenaConexion);
@@ -130,7 +129,7 @@ namespace GestorSalas.Servicios
 
 
 
-
+            
             return dt;
         }
         public DataTable ObtenerTodaInformacionFunciones(string ID_Pelicula)
@@ -427,9 +426,9 @@ namespace GestorSalas.Servicios
 
 
 
-        public bool agregarPelicula(string nombre, string genero, int duracion)
+        public bool agregarPelicula(string nombre, int duracion)
         {
-            string querry = $"INSERT INTO Peliculas (Nombre, Duracion, Genero) VALUES ('{nombre}', {duracion}, '{genero}');";
+            string querry = $"INSERT INTO Peliculas (Nombre, Duracion) VALUES ('{nombre}', {duracion});";
             conexion = new SqlConnection(cadenaConexion);
             using (conexion)
             {

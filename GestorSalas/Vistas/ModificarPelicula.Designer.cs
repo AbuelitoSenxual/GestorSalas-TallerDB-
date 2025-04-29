@@ -40,69 +40,87 @@
             // 
             // agregarPbtn
             // 
-            this.agregarPbtn.Location = new System.Drawing.Point(28, 157);
+            this.agregarPbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
+            this.agregarPbtn.FlatAppearance.BorderSize = 0;
+            this.agregarPbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.agregarPbtn.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.agregarPbtn.ForeColor = System.Drawing.Color.White;
+            this.agregarPbtn.Location = new System.Drawing.Point(27, 157);
             this.agregarPbtn.Name = "agregarPbtn";
-            this.agregarPbtn.Size = new System.Drawing.Size(81, 31);
+            this.agregarPbtn.Size = new System.Drawing.Size(240, 35);
             this.agregarPbtn.TabIndex = 17;
-            this.agregarPbtn.Text = "Agregar";
-            this.agregarPbtn.UseVisualStyleBackColor = true;
+            this.agregarPbtn.Text = "Guardar Cambios";
+            this.agregarPbtn.UseVisualStyleBackColor = false;
             this.agregarPbtn.Click += new System.EventHandler(this.agregarPbtn_Click);
             // 
             // duracionPud
             // 
-            this.duracionPud.Location = new System.Drawing.Point(28, 101);
+            this.duracionPud.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.duracionPud.Location = new System.Drawing.Point(27, 100);
+            this.duracionPud.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
             this.duracionPud.Name = "duracionPud";
-            this.duracionPud.Size = new System.Drawing.Size(126, 20);
+            this.duracionPud.Size = new System.Drawing.Size(127, 25);
             this.duracionPud.TabIndex = 16;
             // 
             // generoCbx
             // 
             this.generoCbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.generoCbx.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.generoCbx.FormattingEnabled = true;
-            this.generoCbx.Location = new System.Drawing.Point(27, 64);
+            this.generoCbx.Location = new System.Drawing.Point(27, 61);
             this.generoCbx.Name = "generoCbx";
-            this.generoCbx.Size = new System.Drawing.Size(127, 21);
+            this.generoCbx.Size = new System.Drawing.Size(127, 25);
             this.generoCbx.TabIndex = 15;
             // 
             // DuracionP
             // 
             this.DuracionP.AutoSize = true;
-            this.DuracionP.Location = new System.Drawing.Point(189, 103);
+            this.DuracionP.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.DuracionP.ForeColor = System.Drawing.Color.White;
+            this.DuracionP.Location = new System.Drawing.Point(170, 103);
             this.DuracionP.Name = "DuracionP";
-            this.DuracionP.Size = new System.Drawing.Size(89, 13);
+            this.DuracionP.Size = new System.Drawing.Size(97, 15);
             this.DuracionP.TabIndex = 14;
-            this.DuracionP.Text = "Duracion minutos";
+            this.DuracionP.Text = "Duración (min)";
             // 
             // GeneroP
             // 
             this.GeneroP.AutoSize = true;
-            this.GeneroP.Location = new System.Drawing.Point(189, 64);
+            this.GeneroP.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.GeneroP.ForeColor = System.Drawing.Color.White;
+            this.GeneroP.Location = new System.Drawing.Point(170, 64);
             this.GeneroP.Name = "GeneroP";
-            this.GeneroP.Size = new System.Drawing.Size(42, 13);
+            this.GeneroP.Size = new System.Drawing.Size(49, 15);
             this.GeneroP.TabIndex = 13;
-            this.GeneroP.Text = "Genero";
+            this.GeneroP.Text = "Género";
             // 
             // NombreP
             // 
             this.NombreP.AutoSize = true;
-            this.NombreP.Location = new System.Drawing.Point(189, 26);
+            this.NombreP.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.NombreP.ForeColor = System.Drawing.Color.White;
+            this.NombreP.Location = new System.Drawing.Point(170, 26);
             this.NombreP.Name = "NombreP";
-            this.NombreP.Size = new System.Drawing.Size(44, 13);
+            this.NombreP.Size = new System.Drawing.Size(53, 15);
             this.NombreP.TabIndex = 12;
             this.NombreP.Text = "Nombre";
             // 
             // nombrepTxb
             // 
+            this.nombrepTxb.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.nombrepTxb.Location = new System.Drawing.Point(27, 23);
             this.nombrepTxb.Name = "nombrepTxb";
-            this.nombrepTxb.Size = new System.Drawing.Size(127, 20);
+            this.nombrepTxb.Size = new System.Drawing.Size(127, 25);
             this.nombrepTxb.TabIndex = 11;
             // 
             // ModificarPelicula
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 286);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(31)))));
+            this.ClientSize = new System.Drawing.Size(300, 210);
             this.Controls.Add(this.agregarPbtn);
             this.Controls.Add(this.duracionPud);
             this.Controls.Add(this.generoCbx);
@@ -110,8 +128,10 @@
             this.Controls.Add(this.GeneroP);
             this.Controls.Add(this.NombreP);
             this.Controls.Add(this.nombrepTxb);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ModificarPelicula";
-            this.Text = "ModificarPelicula";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Modificar Película";
             this.Load += new System.EventHandler(this.ModificarPelicula_Load);
             ((System.ComponentModel.ISupportInitialize)(this.duracionPud)).EndInit();
             this.ResumeLayout(false);

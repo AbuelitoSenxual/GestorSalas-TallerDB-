@@ -47,11 +47,7 @@ namespace GestorSalas.Vistas
                 return;
             }
 
-            if (generoCbx.SelectedIndex == -1)
-            {
-                MessageBox.Show("Por favor, seleccione un género.");
-                return;
-            }
+  
 
             if (string.IsNullOrWhiteSpace(ImagenRuta))
             {
@@ -59,7 +55,7 @@ namespace GestorSalas.Vistas
                 return;
             }
 
-            if (!dBserv.agregarPelicula(nombrepTxb.Text, generoCbx.SelectedItem.ToString(), (int)duracionPud.Value))
+            if (!dBserv.agregarPelicula(nombrepTxb.Text, (int)duracionPud.Value))
             {
                 MessageBox.Show("Error al ingresar datos.");
             }
@@ -76,7 +72,6 @@ namespace GestorSalas.Vistas
         private void ResetFormulario()
         {
             duracionPud.Value = 40;
-            generoCbx.SelectedIndex = -1;
             nombrepTxb.Text = "";
             RutaImagenTxt.Text = "";
             ImagenRuta = ""; 
@@ -140,14 +135,7 @@ namespace GestorSalas.Vistas
 
         private void AgregarPelicualas_Activated(object sender, EventArgs e)
         {
-            generoCbx.Items.Add("Acción");
-            generoCbx.Items.Add("Comedia");
-            generoCbx.Items.Add("Drama");
-            generoCbx.Items.Add("Ciencia Ficción");
-            generoCbx.Items.Add("Fantasía");
-            generoCbx.Items.Add("Terror");
-            generoCbx.Items.Add("Suspenso");
-            generoCbx.Items.Add("Romance");
+            
             duracionPud.Value = 40;
             duracionPud.Minimum = 40;
             duracionPud.Maximum = 450;
