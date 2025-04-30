@@ -13,7 +13,7 @@ namespace GestorSalas
         private Panel panelPeliculas;  
         private baseDatosServicios baseDatosServicios;
         public Empleado empleado;
-        public Venta venta;
+
         public Peliculas(Empleado empleado)
         {
             
@@ -25,7 +25,7 @@ namespace GestorSalas
             panelPeliculas.AutoScroll = true; 
             panelPeliculas.Dock = DockStyle.Fill;  
             this.Controls.Add(panelPeliculas);
-            venta = baseDatosServicios.GenerarVenta(empleado);
+           
         }
 
         private void btnCambiarUsuario_Click(object sender, EventArgs e)
@@ -218,7 +218,7 @@ namespace GestorSalas
 
 
                 
-                Funciones funciones = new Funciones(idPelicula,empleado,venta);
+                Funciones funciones = new Funciones(idPelicula,empleado, baseDatosServicios.GenerarVenta(empleado));
 
               
                 this.Hide();
@@ -235,7 +235,7 @@ namespace GestorSalas
 
         private void ComprarDulcesbtn_Click(object sender, EventArgs e)
         {
-            VentaDulces ventaDulces = new VentaDulces(venta);
+            VentaDulces ventaDulces = new VentaDulces(baseDatosServicios.GenerarVenta(empleado));
             this.Hide();
             ventaDulces.Owner = this;
             ventaDulces.ShowDialog();

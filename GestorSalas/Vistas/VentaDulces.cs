@@ -243,7 +243,10 @@ namespace GestorSalas.Vistas
             }
             else
             {
+                string ticket = db.GenerarTicketVenta(Venta.ID_Venta);
+                MessageBox.Show(ticket, "Ticket de Venta", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
+                
             }
         }
 
