@@ -68,6 +68,8 @@ namespace GestorSalas
                     btn.BackColor = Color.Green;
                 }
             }
+            int Carrito = ObtenerNombresBotonesSeleccionados().Count * funciones.costo;
+            CarritoAsietnoaslbl.Text =Carrito + " $";
         }
 
 
@@ -136,6 +138,11 @@ namespace GestorSalas
         }
 
         private void C4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void B3_Click(object sender, EventArgs e)
         {
 
         }
