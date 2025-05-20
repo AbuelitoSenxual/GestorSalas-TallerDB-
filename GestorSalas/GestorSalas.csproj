@@ -94,6 +94,12 @@
     <Compile Include="Vistas\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\MetodoPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\MetodoPago.Designer.cs">
+      <DependentUpon>MetodoPago.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\ModificarPelicula.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\MetodoPago.resx">
+      <DependentUpon>MetodoPago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\ModificarPelicula.resx">
       <DependentUpon>ModificarPelicula.cs</DependentUpon>

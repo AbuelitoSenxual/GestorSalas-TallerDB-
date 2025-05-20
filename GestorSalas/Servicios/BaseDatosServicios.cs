@@ -656,66 +656,87 @@ namespace GestorSalas.Servicios
         }
 
         public string ProcesarTicket(
-            List<(string NombrePeli, string NombreSala, string NumeroAsiento, float Costo)> ventasPelicula,
-            List<(string NombreProducto, int Cantidad, float Costo)> ventasDulces)
+    List<(string NombrePeli, string NombreSala, string NumeroAsiento, float Costo)> ventasPelicula,
+    List<(string NombreProducto, int Cantidad, float Costo)> ventasDulces)
+        {
+            // Variables para acumular
+            float subtotal = 0f;
+            float iva = 0f;
+            float total = 0f;
+
+            // Armamos el ticket
+            var ticket = new System.Text.StringBuilder();
+
+            // Encabezado
+            ticket.AppendLine("===================================");
+            ticket.AppendLine("             CINE CINEMA           ");
+            ticket.AppendLine("         ¡Gracias por tu visita!   ");
+            ticket.AppendLine($"Fecha: {DateTime.Now:dd/MM/yyyy HH:mm}");
+            ticket.AppendLine("===================================\n");
+
+            // Sección de Películas
+            ticket.AppendLine("Películas:");
+            foreach (var venta in ventasPelicula)
+            {
+                ticket.AppendLine($"- {venta.NombrePeli}");
+                ticket.AppendLine($"  Sala: {venta.NombreSala}  Asiento: {venta.NumeroAsiento}");
+                ticket.AppendLine($"  Costo: ${venta.Costo:F2}\n");
+                subtotal += venta.Costo;
+            }
+
+            ticket.AppendLine("-----------------------------------");
+
+            // Sección de Dulcería
+            if (ventasDulces.Count > 0)
+            {
+                ticket.AppendLine("Dulcería:");
+                foreach (var dulce in ventasDulces)
                 {
-                    // Variables para acumular
-                    float subtotal = 0f;
-                    float iva = 0f;
-                    float total = 0f;
-
-                    // Armamos el ticket usando StringBuilder
-                    var ticket = new System.Text.StringBuilder();
-
-                    // Encabezado
-                    ticket.AppendLine("===================================");
-                    ticket.AppendLine("             CINE CINEMA           ");
-                    ticket.AppendLine("         ¡Gracias por tu visita!   ");
-                    ticket.AppendLine($"Fecha: {DateTime.Now:dd/MM/yyyy HH:mm}");
-                    ticket.AppendLine("===================================\n");
-
-                    // Sección de Películas
-                    ticket.AppendLine("Películas:");
-                    foreach (var venta in ventasPelicula)
-                    {
-                        ticket.AppendLine($"- {venta.NombrePeli}");
-                        ticket.AppendLine($"  Sala: {venta.NombreSala}  Asiento: {venta.NumeroAsiento}");
-                        ticket.AppendLine($"  Costo: ${venta.Costo:F2}\n");
-                        subtotal += venta.Costo;
-                    }
-
-                    ticket.AppendLine("-----------------------------------");
-
-                    // Sección de Dulcería (solo si hay productos)
-                    if (ventasDulces.Count > 0)
-                    {
-                        ticket.AppendLine("Dulcería:");
-                        foreach (var dulce in ventasDulces)
-                        {
-                            float costoProducto = dulce.Costo * dulce.Cantidad;
-                            ticket.AppendLine($"- {dulce.NombreProducto} x{dulce.Cantidad}");
-                            ticket.AppendLine($"  Total: ${costoProducto:F2}\n");
-                            subtotal += costoProducto;
-                        }
-                    }
-
-                    ticket.AppendLine("-----------------------------------");
-
-                    // Cálculo de totales
-                    iva = subtotal * 0.16f; // IVA 16%
-                    total = subtotal + iva;
-
-                    ticket.AppendLine($"Subtotal:      ${subtotal:F2}");
-                    ticket.AppendLine($"IVA (16%):      ${iva:F2}");
-                    ticket.AppendLine($"Total a pagar:  ${total:F2}");
-
-                    ticket.AppendLine("\n===================================");
-                    ticket.AppendLine("     ¡Gracias por su preferencia!  ");
-                    ticket.AppendLine("           Cine Cinema 🎬🍿         ");
-                    ticket.AppendLine("===================================");
-
-                    return ticket.ToString();
+                    float costoProducto = dulce.Costo * dulce.Cantidad;
+                    ticket.AppendLine($"- {dulce.NombreProducto} x{dulce.Cantidad}");
+                    ticket.AppendLine($"  Total: ${costoProducto:F2}\n");
+                    subtotal += costoProducto;
                 }
+            }
+
+            ticket.AppendLine("-----------------------------------");
+
+            // Cálculo de totales
+            iva = subtotal * 0.16f;
+            total = subtotal + iva;
+
+            ticket.AppendLine($"Subtotal:      ${subtotal:F2}");
+            ticket.AppendLine($"IVA (16%):      ${iva:F2}");
+            ticket.AppendLine($"Total a pagar:  ${total:F2}");
+
+            // ======= Aquí llamamos al formulario de pago =======
+            var formularioPago = new GestorSalas.Vistas.MetodoPago((int)total);
+            if (formularioPago.ShowDialog() == DialogResult.OK)
+            {
+                string metodo = formularioPago.MetodoPagos ? "Efectivo" : "Tarjeta";
+                int montoIngresado = formularioPago.MontoIngresado;
+                int cambio = formularioPago.Cambio;
+
+                ticket.AppendLine($"Método de pago: {metodo}");
+                ticket.AppendLine($"Monto entregado: ${montoIngresado}");
+                if (formularioPago.MetodoPagos) // Solo mostrar cambio si es efectivo
+                {
+                    ticket.AppendLine($"Cambio: ${cambio}");
+                }
+            }
+            else
+            {
+                ticket.AppendLine("⚠️ Pago cancelado.");
+            }
+
+            ticket.AppendLine("\n===================================");
+            ticket.AppendLine("     ¡Gracias por su preferencia!  ");
+            ticket.AppendLine("           Cine Cinema 🎬🍿         ");
+            ticket.AppendLine("===================================");
+
+            return ticket.ToString();
+        }
+
 
 
         public List<(string NombreProducto, int Stock, string RutaImagen, decimal Precio)> ObtenerProductosConStock()

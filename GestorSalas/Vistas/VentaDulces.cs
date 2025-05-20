@@ -220,7 +220,7 @@ namespace GestorSalas.Vistas
                 }
             }
 
-            MessageBox.Show("¡Compra realizada con éxito!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             db.InsertarProductosComprados(Venta.ID_Venta, productosComprados);
 
             string ticket = db.GenerarTicketVenta(Venta.ID_Venta);

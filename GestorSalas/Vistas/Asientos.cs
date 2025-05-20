@@ -31,6 +31,7 @@ namespace GestorSalas
             this.funciones = funciones;
             InitializeComponent();
 
+
             foreach (Control control in this.Controls)
             {
                 if (control is Button)
@@ -38,6 +39,25 @@ namespace GestorSalas
                     control.Click += Boton_Click;
                 }
             }
+            // Aplicar estilo de "Funciones" al form actual
+            this.BackColor = Color.FromArgb(32, 30, 31); // Fondo oscuro elegante
+            this.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+            // Botón continuar (mismo azul moderno)
+            btnBuscarAsiento.BackColor = Color.FromArgb(0, 120, 215);
+            btnBuscarAsiento.ForeColor = Color.White;
+            btnBuscarAsiento.FlatStyle = FlatStyle.Flat;
+            btnBuscarAsiento.FlatAppearance.BorderSize = 0;
+            btnBuscarAsiento.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+            // Cambiar el color del texto de etiquetas y total
+            lblA.ForeColor = Color.White;
+            label1.ForeColor = Color.White;
+            label2.ForeColor = Color.White;
+            label3.ForeColor = Color.White;
+            lblB.ForeColor = Color.White;
+            label5.ForeColor = Color.White;
+            CarritoAsietnoaslbl.ForeColor = Color.White;
+
         }
         public List<string> ObtenerNombresBotonesSeleccionados()
         {
